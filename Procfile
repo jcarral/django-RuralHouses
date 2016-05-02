@@ -1,0 +1,1 @@
+web: gunicorn ruralhouses.wsgi --log-file -

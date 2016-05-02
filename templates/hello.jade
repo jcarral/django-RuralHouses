@@ -1,0 +1,19 @@
+{% extends "base.jade" %}
+
+{% block page_title %}
+|Bienvenido
+{% endblock %}
+
+{% block content %}
+
+h1 Hola!
+a(href="{% url 'clientes:logout' %}") Logout
+
+h2
+  | {% if user.is_authenticated %}
+  | {{ user.username}}
+  | {% else %}
+  a(href="{% url 'clientes:authenticate' %}")
+  | {% endif %}
+
+{% endblock%}

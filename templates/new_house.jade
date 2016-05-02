@@ -1,0 +1,14 @@
+{% extends "base.jade" %}
+
+{% block page_title %}
+| Nueva casa
+{% endblock %}
+
+{% block content %}
+
+form(method="POST" enctype="multipart/form-data")
+  | {% csrf_token %}
+  | {{ form.as_p }}
+  button(type="submit") Enviar
+
+{% endblock%}

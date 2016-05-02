@@ -1,0 +1,21 @@
+{% extends "base.jade" %}
+
+{% block page_title %}
+{% if title %}
+{{ title }}
+{%else%}
+| Casas rurales
+{% endif%}
+{% endblock %}
+
+{% block content %}
+a(href="{% url 'casas.views.new_house' %}") Nueva Casa
+ul
+  | {% for rh in casas %}
+  li 
+    a(href="{% url 'casas.views.casa_ficha' pk=rh.pk %}") {{ rh.nombre }}
+    | {%if rh.imagen %}
+    img(src="{{rh.imagen.url}}", alt="")
+    | {% endif %}
+  | {% endfor %}
+{% endblock%}

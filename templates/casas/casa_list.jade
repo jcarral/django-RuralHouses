@@ -1,0 +1,23 @@
+{% extends "base.jade" %}
+
+{% block page_title %}
+{% if title %}
+{{ title }}
+{%else%}
+| Casas rurales
+{% endif%}
+{% endblock %}
+
+{% block content %}
+h1 Titulo
+  
+a(href="") Nueva casa
+ul
+  | {% for rh in object_list %}
+  li 
+    a(href="") {{ rh.nombre }}
+    | {%if rh.imagen %}
+    img(src="{{rh.imagen.url}}", alt="")
+    | {% endif %}
+  | {% endfor %}
+{% endblock%}
