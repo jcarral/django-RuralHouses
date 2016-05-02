@@ -1,0 +1,16 @@
+body{
+  background-color: #fafafa;
+  margin: 0;
+  padding: 0;
+}
+
+header{
+  width: 100%;
+  background: #0a55b4;
+  height: 100px;
+}
+
+img{
+  max-width: 100px;
+  max-height: 100px;
+}
