@@ -10,8 +10,20 @@ html
     link(rel="stylesheet", href="{% static 'css/base.css' %}")
   
   body
-    header 
+    header.header
+      | {% if user.is_authenticated %}
+      h1 hola {{ user.username }}
+      a(href="/logout") Salir
+      | {% else %}
+      a(href="/login") Login
+      | {% endif %}
+    div.banner
+      h2.banner-title {% block section_title %}{% endblock %}
     section
       | {% block content %}
       | {% endblock %}
-    footer
+    footer.footer
+      div.footer-main
+        a(href="https://github.com/jcdc21/django-RuralHouses")
+          img(src="/static/images/github.png", alt="", class="github-logo")
+      div.footer-small

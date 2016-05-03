@@ -1,0 +1,19 @@
+@import "_reset.scss";
+@import '_variables.scss';
+@import '_mixins.scss';
+@import '_footer.scss';
+@import "_navbar.scss";
+@import '_list_casas.scss';
+
+body{
+  width: 100%;
+  min-height: 100vh;
+  max-width: 100vw;
+  @include flexbox($dir: column, $justify: space-between, $align: center);
+  box-sizing: border-box;
+}
+
+img{
+  max-width: 200px;
+  max-height: 200px;
+}

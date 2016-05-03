@@ -8,16 +8,32 @@
 {% endif%}
 {% endblock %}
 
+{% block section_title %}
+{% if title %}
+{{ title }}
+{%else%}
+| Lista casas rurales
+{% endif%}
+{% endblock %}
+
 {% block content %}
 h1 Titulo
   
 a(href="") Nueva casa
-ul
+ul.casas-list-container
+  | {% if object_list %}
   | {% for rh in object_list %}
-  li 
-    a(href="") {{ rh.nombre }}
+  li.casas-list-item
     | {%if rh.imagen %}
     img(src="{{rh.imagen.url}}", alt="")
+    | {% else %}
+    img(src="/static/images/casa_generica.png", alt="")
     | {% endif %}
+    div.casas-list-item-info
+      a(href="") {{ rh.nombre }}
+      p {{ rh.descripcion|truncatechars:140}}
+      div.casas-list-item-details
+        p {{rh.date}}
   | {% endfor %}
+  | {% endif %}
 {% endblock%}

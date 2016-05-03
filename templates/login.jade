@@ -4,24 +4,21 @@
 |Login
 {% endblock %}
 
-{% block content %}
+{% block section_title %}
+{% if title %}
+{{ title }}
+{%else%}
+| Iniciar sesión
+{% endif%}
+{% endblock %}
 
+{% block content %}
 h3 Login
 form(action="" method="post")
   | {% csrf_token %}
   
-  input(type="text" name="username")
-  input(type="password" name="password")
-  input(type='hidden', name='action', value='login')
+  input(type="text", name="username", size="50")
+  input(type="password", name="password", size="50")
   button(type="submit") Login
-
-h3 SignUp
-form(action="" method="post")
-  | {% csrf_token %}
-  
-  input(type="hidden", name="action", value="signup")
-  input(type='text', name='username')
-  input(type="password", name='password')
-  button(type='submit') SignUp
-
+a(href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}") LogIn con Facebook
 {% endblock%}

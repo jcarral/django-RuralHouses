@@ -1,0 +1,24 @@
+.casas-list{
+  &-container{
+    width: $sMainContainer;
+    background-color: $cWhite;
+    min-height: 70vh;
+    padding: 10px;
+    @include flexbox($dir: column, $align: center)
+  }
+
+  &-item{
+    width: 95%;
+    border: 1px solid black;
+    margin-top: 10px;
+    padding: 5px;
+    @include flexbox($dir: row);
+
+    &-info{
+      @include flexbox($dir: column);
+    }
+  }
+
+
+
+}

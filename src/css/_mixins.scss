@@ -1,0 +1,141 @@
+/*
+* @include triangle within a pseudo element and add positioning properties (ie. top, left)
+* $direction: up, down, left, right
+*/
+@mixin triangle($direction, $size: 6px, $color: #222) {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 0;
+  width: 0;
+  @if ($direction == 'up') {
+    border-bottom: $size solid $color;
+    border-left: 1/2*$size solid transparent;
+    border-right: 1/2*$size solid transparent;
+  }
+  @else if ($direction == 'down') {
+    border-top: $size solid $color;
+    border-left: 1/2*$size solid transparent;
+    border-right: 1/2*$size solid transparent;
+  }
+  @else if ($direction == 'left') {
+    border-top: 1/2*$size solid transparent;
+    border-bottom: 1/2*$size solid transparent;
+    border-right: $size solid $color;
+  }
+  @else if ($direction == 'right') {
+    border-top: 1/2*$size solid transparent;
+    border-bottom: 1/2*$size solid transparent;
+    border-left: $size solid $color;
+  }
+}
+
+$smartphone: 480px;
+$tabletPortrait: 767px;
+$tabletLandscape: 1024px;
+$desktop: 1174px;
+$largeScreen: 1400px;
+
+@mixin respondTo($media) {
+  @if $media == smartphone {
+    @media (max-width: $smartphone) {
+      @content;
+    }
+  }
+  @else if $media == tablet {
+    @media (min-width: $tabletPortrait) and (max-width: $tabletLandscape) {
+      @content;
+    }
+  }
+  @else if $media == smallScreen {
+    @media (max-width: $desktop) {
+      @content;
+    }
+  }
+  @else if $media == desktop {
+    @media (min-width: $desktop) {
+      @content;
+    }
+  }
+}
+@mixin animation($name, $duration: 1000ms, $iterations: infinite, $timing-function: ease, $delay: 0ms) {
+  animation: $name $duration $iterations $timing-function $delay;
+}
+@mixin alerted($color: #f12400) {
+  &:before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    height: 8px;
+    width: 8px;
+    border-radius: 10px;
+    background-color: $color;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 20px;
+    width: 20px;
+    @include border-radius(20px);
+    background-color: transparent;
+    border: solid $color;
+    border-width: 2px; // animates
+    box-sizing: border-box;
+    @include animation($name: alertMe);
+  }
+}
+@keyframes alertMe {
+  from {
+    border-width: 3px;
+    border-color: $color;
+  }
+  to {
+    border-width: 0;
+    border-color: rgba($color, .1);
+  }
+}
+//Absolute positioning mixin
+@mixin absolute ($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  position: absolute;
+}
+
+@mixin fixed ($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  position: fixed;
+}
+
+@mixin relative ($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  position: relative;
+}
+
+@mixin size($width, $height: $width) {
+      width: $width;
+      height: $height;
+}
+
+@mixin square($size){
+  width: $size;
+  height: $size;
+}
+
+@mixin flexbox($dir: row, $wrap: nowrap, $justify: flex-start, $align: flex-start){
+  display: flex;
+  flex-direction: $dir;
+  flex-wrap: $wrap;
+  justify-content: $justify;
+  align-items: $align;
+}

@@ -1,0 +1,21 @@
+{% extends "base.jade" %}
+
+{% block page_title %}
+| Registrarse
+{% endblock %}
+
+{% block section_title %}
+{% if title %}
+{{ title }}
+{%else%}
+| Registrarse
+{% endif%}
+{% endblock %}
+
+{% block content %}
+form(action="", method="POST", enctype="multipart/form-data")
+  | {% csrf_token %}
+  | {{ user_form.as_p }}
+  | {{ perfil_form.as_p }}
+  button(type="submit")
+{% endblock %}

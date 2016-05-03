@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -63,6 +64,9 @@ TEMPLATES = (
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                #social auth context processors
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ], 'loaders': [
                 # PyJade part:   ##############################
                 ('pyjade.ext.django.Loader', (
@@ -75,6 +79,21 @@ TEMPLATES = (
         },
     },
 )
+
+AUTHENTICATION_BACKENDS = (
+# Facebook
+'social.backends.facebook.FacebookOAuth2',
+
+# Django
+'django.contrib.auth.backends.ModelBackend',
+)
+
+#SOCIAL KEYS
+SOCIAL_AUTH_FACEBOOK_KEY = '571322729698419'
+SOCIAL_AUTH_FACEBOOK_SECRET = '38eb6aabf42e82370adae53adfa23a3b'
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/"
+
 
 WSGI_APPLICATION = 'ruralhouses.wsgi.application'
 
@@ -104,6 +123,10 @@ AUTH_PASSWORD_VALIDATORS = (
     },
 )
 
+PASSWORD_HASHERS = (
+'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+)
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
@@ -135,12 +158,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
-print(PROJECT_ROOT)
-print(STATIC_URL)
-print(STATIC_ROOT)
-print(MEDIA_ROOT)
-print(MEDIA_URL)
