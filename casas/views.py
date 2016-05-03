@@ -25,6 +25,8 @@ def user_login(request):
         else:
             print('Error al introducir los datos')
     else:
+        if request.user.is_authenticated():
+            return HttpResponseRedirect('/')
         return render(request, 'login.jade', {})
 
 @login_required(login_url='/login')

@@ -8,17 +8,29 @@ html
     meta(name='description', content='')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel="stylesheet", href="{% static 'css/base.css' %}")
-  
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css")
+    
   body
-    header.header
-      | {% if user.is_authenticated %}
-      h1 hola {{ user.username }}
-      a(href="/logout") Salir
-      | {% else %}
-      a(href="/login") Login
-      | {% endif %}
-    div.banner
-      h2.banner-title {% block section_title %}{% endblock %}
+    header
+      div.header
+        h1.header-titulo 
+          a(href="/") RuralHouse's
+        navbar.header-nav
+          | {% if user.is_authenticated %}
+          h1 hola {{ user.username }}
+          a(href="" class="header-btn")
+            i.fa.fa-plus
+          a(href="" class="header-btn")
+            i.fa.fa-pencil-square-o
+          a(href="/logout" class="header-btn")
+            i.fa.fa-times
+          
+          | {% else %}
+          a(href="/login" class="header-btn") Iniciar sesión
+          a(href="/register" class="header-btn") Registrarse
+          | {% endif %}
+      div.banner
+        h2.banner-title {% block section_title %}{% endblock %}
     section
       | {% block content %}
       | {% endblock %}

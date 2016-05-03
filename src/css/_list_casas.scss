@@ -4,6 +4,7 @@
     background-color: $cWhite;
     min-height: 70vh;
     padding: 10px;
+    margin: 10px 0;
     @include flexbox($dir: column, $align: center)
   }
 

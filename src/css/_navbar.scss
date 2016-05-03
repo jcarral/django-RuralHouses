@@ -1,8 +1,33 @@
-.header{
+header{
   width: 100%;
-  height: 64px;
   background-color: $cBrown;
-  box-shadow: 0px 2px 14px -6px rgba(0,0,0,0.75);
+  @include flexbox($dir: column, $align: center);
+
+}
+.header{
+  width: $sMainContainer;
+  height: 64px;
+  //box-shadow: 0px 2px 14px -6px rgba(0,0,0,0.75);
+  @include flexbox($justify: space-between, $align: center);
+
+  &-titulo{
+    font-family: 'Open sans';
+    font-size: 32px;
+    color: $charcoal;
+  }
+
+  &-nav{
+    @include flexbox($align: center)
+  }
+
+  &-btn{
+    border-radius: 1px solid black;
+    padding: 10px;
+    background-color: $cMain;
+    margin: 0 10px;
+    border-radius: 3px;
+  }
+
 }
 
 .banner{

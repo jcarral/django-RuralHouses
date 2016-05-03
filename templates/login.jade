@@ -19,6 +19,14 @@ form(action="" method="post")
   
   input(type="text", name="username", size="50")
   input(type="password", name="password", size="50")
-  button(type="submit") Login
-a(href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}") LogIn con Facebook
+  button(type="submit", class="login-btn") Login
+div.login-social
+  a(href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}", class="login-social-btn twitter-btn")
+    i.fa.fa-twitter
+  a(href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}", class="login-social-btn facebook-btn")
+    i.fa.fa-facebook-square
+  a(href="{% url 'social:begin' 'github' %}?next={{ request.path }}", class="login-social-btn github-btn")
+    i.fa.fa-github-alt
+div.register
+  a(href="{}")
 {% endblock%}

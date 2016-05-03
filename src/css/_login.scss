@@ -1,0 +1,60 @@
+.login{
+  width: $sMainContainer;
+  background-color: $cWhite;
+  &-btn{
+    height: 30px;
+    border-radius: 3px;
+    background-color: $concrete;
+  }
+
+  &-social{
+    @include flexbox($dir: row, $align: center, $justify: center, $wrap: wrap);
+    width: 100%;
+    border-top: 3px solid $cDarkGrey;
+    position: relative;
+    padding: 10px;
+    margin: 10px 0;
+    &:after{
+      content: "or";
+      position: absolute;
+      top: -10px;
+      right: 48%;
+      background-color: $cWhite;
+    }
+
+    &-btn{
+      width: 150px;
+      padding: 5px;
+      margin: 5px;
+      height: 30px;
+      background-color: $carrot;
+      border-radius: 3px;
+      @include flexbox($justify: center, $align: center);
+      i{
+        color: white;
+        font-size: 32px;
+      }
+    }
+  }
+}
+
+.twitter-btn{
+  background-color: $cTwitter;
+  &:hover{
+    background-color: darken($cTwitter, 10%);
+  }
+}
+
+.facebook-btn{
+  background-color: $cFacebook;
+  &:hover{
+    background-color: darken($cFacebook, 10%);
+  }
+}
+
+.github-btn{
+  background-color: $cGithub;
+  &:hover{
+    background-color: darken($cGithub, 10%);
+  }
+}

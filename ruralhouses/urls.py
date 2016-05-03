@@ -7,6 +7,6 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('casas.urls', namespace='casas')),
-    url('', include('social.apps.django_app.urls', namespace='social')),
-    
+    url(r'^social/',include('social.apps.django_app.urls', namespace='social')),
+
 ]

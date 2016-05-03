@@ -64,7 +64,7 @@ TEMPLATES = (
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                #social auth context processors
+                 # Python Social Auth Context Processors
                 'social.apps.django_app.context_processors.backends',
                 'social.apps.django_app.context_processors.login_redirect',
             ], 'loaders': [
@@ -83,7 +83,8 @@ TEMPLATES = (
 AUTHENTICATION_BACKENDS = (
 # Facebook
 'social.backends.facebook.FacebookOAuth2',
-
+ # Twitter
+'social.backends.twitter.TwitterOAuth',
 # Django
 'django.contrib.auth.backends.ModelBackend',
 )
@@ -91,8 +92,15 @@ AUTHENTICATION_BACKENDS = (
 #SOCIAL KEYS
 SOCIAL_AUTH_FACEBOOK_KEY = '571322729698419'
 SOCIAL_AUTH_FACEBOOK_SECRET = '38eb6aabf42e82370adae53adfa23a3b'
+# Twitter Keys
+SOCIAL_AUTH_TWITTER_KEY = 'cu3Id5saeSntXVZAOlimwJtdM'
+SOCIAL_AUTH_TWITTER_SECRET = 'AhPucbUAf4iqwIsxEPRgCYoKDCEnOdqWoHq5XEbjadyha74XWg'
+# Github Keys
+SOCIAL_AUTH_GITHUB_KEY = '55fdecb757876bf42191'
+SOCIAL_AUTH_GITHUB_SECRET = '39f56aa7a202526b631683cf8079bc122a247796'
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/"
+
 
 
 WSGI_APPLICATION = 'ruralhouses.wsgi.application'
