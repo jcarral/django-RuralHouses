@@ -1,6 +1,8 @@
 header{
   width: 100%;
-  background-color: $cBrown;
+  //background-color: $cBrown;
+  background-color: #444;
+  border-top: 3px solid $cBrown;
   @include flexbox($dir: column, $align: center);
 
 }
@@ -13,30 +15,69 @@ header{
   &-titulo{
     font-family: 'Open sans';
     font-size: 32px;
-    color: $charcoal;
+    color: #fff;
   }
 
   &-nav{
-    @include flexbox($align: center)
+    @include flexbox($align: center);
+
+    &-titulo{
+      color: white;
+      font-weight: bold;
+      margin: 0 10px;
+    }
   }
 
   &-btn{
     border-radius: 1px solid black;
     padding: 10px;
-    background-color: $cMain;
+    background: $cMain url('/static/images/button-glass.png');
     margin: 0 10px;
     border-radius: 3px;
+
+    &.signin{
+      @include boton_menu($cMain);
+    }
+    &.signup{
+      @include boton_menu($aoi);
+    }
+    &.logout{
+      @include boton_menu(#fed5d5);
+      color: red;
+    }
+    &.edit-profile{
+      @include boton_menu($cLightGrey);
+    }
+    &.new-house{
+      @include boton_menu($cLightGrey);
+
+    }
   }
+
+
 
 }
 
 .banner{
+  position: relative;
   width: 100%;
   height: 150px;
   background-color: $cLightGrey;
+  //background: url('/static/images/banner.jpg');
   @include flexbox($justify: center, $align: center);
 
+  &-opacity{
+    @include absolute($top: 0, $left: 0);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.19);
+    z-index: 5;
+  }
+
   &-title{
+    @include absolute($top: 40%, $left: 40%);
     font-size: 32px;
+    font-weight: bold;
+    //color: white;
   }
 }

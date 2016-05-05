@@ -85,6 +85,11 @@ AUTHENTICATION_BACKENDS = (
 'social.backends.facebook.FacebookOAuth2',
  # Twitter
 'social.backends.twitter.TwitterOAuth',
+#Google
+'social.backends.google.GoogleOAuth2',
+'social.backends.google.GoogleOAuth',
+#Github
+'social.backends.github.GithubOAuth2',
 # Django
 'django.contrib.auth.backends.ModelBackend',
 )
@@ -98,7 +103,9 @@ SOCIAL_AUTH_TWITTER_SECRET = 'AhPucbUAf4iqwIsxEPRgCYoKDCEnOdqWoHq5XEbjadyha74XWg
 # Github Keys
 SOCIAL_AUTH_GITHUB_KEY = '55fdecb757876bf42191'
 SOCIAL_AUTH_GITHUB_SECRET = '39f56aa7a202526b631683cf8079bc122a247796'
-
+#Google Keys
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '613237002873-kp56fncr34gec3qf4rq6743ju4g3poph.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'THfLvYYwargAqvDBImg0QTeF'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/"
 
 

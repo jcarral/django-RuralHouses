@@ -1,29 +1,64 @@
 .login{
   width: $sMainContainer;
-  background-color: $cWhite;
+
+
   &-btn{
-    height: 30px;
-    border-radius: 3px;
-    background-color: $concrete;
+    height: 50px;
+    background-color: #17c;
+    width: 400px;
+    outline: 0;
+    border: 0;
+    font-weight: bolder;
+    cursor: pointer;
+    font-size: 1em;
+    color: $white;
+    box-sizing: border-box;
+    &:hover{
+      background-color: darken(#17c, 10%);
+      color: darken($white, 10%);
+    }
+  }
+
+
+  &-fields{
+    @include flexbox($dir: column, $wrap: wrap, $justify: center, $align: flex-end);
+    width: 450px;
+    padding: 0 2em 0 0;
+  }
+
+  @include flexbox($dir: row, $justify: center, $wrap: wrap, $align: center);
+  input{
+    border: 1px;
+    border-style: solid;
+    background-color: #fff;
+    border-color: #bbb;
+    color: #555;
+    padding: 1em;
+    box-sizing: border-box;
+    width: 400px;
+    outline: 0;
+    font-size: 0.95em;
+    margin-bottom: 10px;
   }
 
   &-social{
-    @include flexbox($dir: row, $align: center, $justify: center, $wrap: wrap);
-    width: 100%;
-    border-top: 3px solid $cDarkGrey;
+    @include flexbox($dir: column, $justify: center, $wrap: wrap);
+    width: 450px;
+    border-left: 3px solid $cDarkGrey;
     position: relative;
-    padding: 10px;
-    margin: 10px 0;
+    padding: 2em 0 2em 2em;
+    box-sizing: border-box;
     &:after{
       content: "or";
+      padding: 5px 0;
       position: absolute;
-      top: -10px;
-      right: 48%;
-      background-color: $cWhite;
+      top: 40%;
+      left: -10px;
+      background-color: white;
     }
 
     &-btn{
-      width: 150px;
+      width: 300px;
       padding: 5px;
       margin: 5px;
       height: 30px;
@@ -36,6 +71,7 @@
       }
     }
   }
+
 }
 
 .twitter-btn{
@@ -56,5 +92,38 @@
   background-color: $cGithub;
   &:hover{
     background-color: darken($cGithub, 10%);
+  }
+}
+
+.google-btn{
+  background-color: $cGoogle;
+  &:hover{
+    background-color: darken($cGoogle, 10%);
+  }
+}
+
+.register{
+  @include flexbox($dir: column, $justify: center, $align: center);
+  padding: 10px;
+  &-titulo{
+    font-size: 1.25em;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+
+  &-btn{
+    border-radius: 3px;
+    background-color: $emerald;
+    padding: 5px;
+    height: 30px;
+    width: 75%;
+    text-align: center;
+    font-weight: bolder;
+    color: white;
+    line-height: 30px;
+
+    &:hover{
+      background-color: darken($emerald, 10%);
+    }
   }
 }

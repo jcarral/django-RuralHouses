@@ -36,6 +36,8 @@ $tabletLandscape: 1024px;
 $desktop: 1174px;
 $largeScreen: 1400px;
 
+
+
 @mixin respondTo($media) {
   @if $media == smartphone {
     @media (max-width: $smartphone) {
@@ -138,4 +140,15 @@ $largeScreen: 1400px;
   flex-wrap: $wrap;
   justify-content: $justify;
   align-items: $align;
+}
+
+//BOTONES
+@mixin boton_menu($color: #fff){
+
+    background: $color url('/static/images/button-glass.png');
+    border: 1px solid darken($color, 5%);
+    &:hover{
+      background: darken($color, 10%) url('/static/images/button-glass.png');
+    }
+
 }

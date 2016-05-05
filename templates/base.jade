@@ -17,21 +17,22 @@ html
           a(href="/") RuralHouse's
         navbar.header-nav
           | {% if user.is_authenticated %}
-          h1 hola {{ user.username }}
-          a(href="" class="header-btn")
+          h1.header-nav-titulo ¡ Hola {{ user.username }} !
+          a(href="" class="header-btn new-house")
             i.fa.fa-plus
-          a(href="" class="header-btn")
-            i.fa.fa-pencil-square-o
-          a(href="/logout" class="header-btn")
+          a(href="{% url 'casas:editarperfil' pk=user.pk %}" class="header-btn edit-profile")
+            i.fa.fa-cog
+          a(href="/logout" class="header-btn logout")
             i.fa.fa-times
           
           | {% else %}
-          a(href="/login" class="header-btn") Iniciar sesión
-          a(href="/register" class="header-btn") Registrarse
+          a(href="/login" class="header-btn signin") Iniciar sesión
+          a(href="/register" class="header-btn signup") Registrarse
           | {% endif %}
       div.banner
+        div.banner-opacity
         h2.banner-title {% block section_title %}{% endblock %}
-    section
+    section.main
       | {% block content %}
       | {% endblock %}
     footer.footer

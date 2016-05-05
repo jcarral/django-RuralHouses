@@ -1,17 +1,22 @@
 from django.shortcuts import render, get_object_or_404
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic import ListView
+from django.views.generic import ListView, UpdateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from .forms import UserForm, PerfilForm
-from .models import Casa
+from .models import Casa, Perfil
 
 class CasasList(ListView):
     model = Casa
+
+
+class UsuarioUpdate(UpdateView):
+    model = Perfil
+    fields = ['nombre', 'apellido']
 
 def user_login(request):
     if request.method == 'POST':

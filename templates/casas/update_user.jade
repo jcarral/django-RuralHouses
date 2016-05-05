@@ -1,0 +1,15 @@
+{% extends "base.jade" %}
+
+{% block page_title %}
+{% if title %}
+{{ casa.nombre }}
+{%else%}
+| Casas rurales
+{% endif%}
+{% endblock %}
+
+{% block content %}
+form(action="" method="post")
+  | {% csrf_token %}
+  | {{ form.as_p}}
+{% endblock %}

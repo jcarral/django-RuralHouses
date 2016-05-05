@@ -76,7 +76,8 @@ table {
 
 header {
   width: 100%;
-  background-color: #8B572A;
+  background-color: #444;
+  border-top: 3px solid #8B572A;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -94,21 +95,52 @@ header {
   .header-titulo {
     font-family: 'Open sans';
     font-size: 32px;
-    color: #2B2B2B; }
+    color: #fff; }
   .header-nav {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center; }
+    .header-nav-titulo {
+      color: white;
+      font-weight: bold;
+      margin: 0 10px; }
   .header-btn {
     border-radius: 1px solid black;
     padding: 10px;
-    background-color: #2ecc71;
+    background: #2ecc71 url("/static/images/button-glass.png");
     margin: 0 10px;
     border-radius: 3px; }
+    .header-btn.signin {
+      background: #2ecc71 url("/static/images/button-glass.png");
+      border: 1px solid #29b765; }
+      .header-btn.signin:hover {
+        background: #25a25a url("/static/images/button-glass.png"); }
+    .header-btn.signup {
+      background: #69D2E7 url("/static/images/button-glass.png");
+      border: 1px solid #53cbe3; }
+      .header-btn.signup:hover {
+        background: #3dc5e0 url("/static/images/button-glass.png"); }
+    .header-btn.logout {
+      background: #fed5d5 url("/static/images/button-glass.png");
+      border: 1px solid #fdbcbc;
+      color: red; }
+      .header-btn.logout:hover {
+        background: #fda3a3 url("/static/images/button-glass.png"); }
+    .header-btn.edit-profile {
+      background: #FBFAF9 url("/static/images/button-glass.png");
+      border: 1px solid #f1edea; }
+      .header-btn.edit-profile:hover {
+        background: #e7e1da url("/static/images/button-glass.png"); }
+    .header-btn.new-house {
+      background: #FBFAF9 url("/static/images/button-glass.png");
+      border: 1px solid #f1edea; }
+      .header-btn.new-house:hover {
+        background: #e7e1da url("/static/images/button-glass.png"); }
 
 .banner {
+  position: relative;
   width: 100%;
   height: 150px;
   background-color: #FBFAF9;
@@ -117,8 +149,24 @@ header {
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center; }
+  .banner-opacity {
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.19);
+    z-index: 5; }
   .banner-title {
-    font-size: 32px; }
+    top: 40%;
+    right: auto;
+    bottom: auto;
+    left: 40%;
+    position: absolute;
+    font-size: 32px;
+    font-weight: bold; }
 
 .casas-list-container {
   width: 980px;
@@ -150,30 +198,65 @@ header {
 
 .login {
   width: 980px;
-  background-color: #fffafa; }
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center; }
   .login-btn {
-    height: 30px;
-    border-radius: 3px;
-    background-color: #95a5a6; }
-  .login-social {
+    height: 50px;
+    background-color: #17c;
+    width: 400px;
+    outline: 0;
+    border: 0;
+    font-weight: bolder;
+    cursor: pointer;
+    font-size: 1em;
+    color: #F7F7F7;
+    box-sizing: border-box; }
+    .login-btn:hover {
+      background-color: #0d5c9d;
+      color: #dedede; }
+  .login-fields {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-    width: 100%;
-    border-top: 3px solid #4A473C;
+    align-items: flex-end;
+    width: 450px;
+    padding: 0 2em 0 0; }
+  .login input {
+    border: 1px;
+    border-style: solid;
+    background-color: #fff;
+    border-color: #bbb;
+    color: #555;
+    padding: 1em;
+    box-sizing: border-box;
+    width: 400px;
+    outline: 0;
+    font-size: 0.95em;
+    margin-bottom: 10px; }
+  .login-social {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    width: 450px;
+    border-left: 3px solid #4A473C;
     position: relative;
-    padding: 10px;
-    margin: 10px 0; }
+    padding: 2em 0 2em 2em;
+    box-sizing: border-box; }
     .login-social:after {
       content: "or";
+      padding: 5px 0;
       position: absolute;
-      top: -10px;
-      right: 48%;
-      background-color: #fffafa; }
+      top: 40%;
+      left: -10px;
+      background-color: white; }
     .login-social-btn {
-      width: 150px;
+      width: 300px;
       padding: 5px;
       margin: 5px;
       height: 30px;
@@ -203,6 +286,35 @@ header {
   .github-btn:hover {
     background-color: #1a1a1a; }
 
+.google-btn {
+  background-color: #dd4b39; }
+  .google-btn:hover {
+    background-color: #c23321; }
+
+.register {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 10px; }
+  .register-titulo {
+    font-size: 1.25em;
+    font-weight: bold;
+    margin-bottom: 30px; }
+  .register-btn {
+    border-radius: 3px;
+    background-color: #2ecc71;
+    padding: 5px;
+    height: 30px;
+    width: 75%;
+    text-align: center;
+    font-weight: bolder;
+    color: white;
+    line-height: 30px; }
+    .register-btn:hover {
+      background-color: #25a25a; }
+
 body {
   width: 100%;
   min-height: 100vh;
@@ -222,5 +334,9 @@ img {
 a {
   text-decoration: none;
   color: inherit; }
+
+.main {
+  padding: 10px;
+  box-sizing: border-box; }
 
 /*# sourceMappingURL=base.css.map */
