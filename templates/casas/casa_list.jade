@@ -31,7 +31,16 @@ ul.casas-list-container
       a(href="") {{ rh.nombre }}
       p {{ rh.descripcion|truncatechars:140}}
       div.casas-list-item-details
-        p {{rh.date}}
+        p {{rh.fecha}}
+      a(href="{% url 'casas:detail' pk=rh.pk %}") Ver más
   | {% endfor %}
+  | {% endif %}
+  | {% if page_obj.has_previous %}
+  a(href="/?page={{ page_obj.previous_page_number }}") previous
+  |{% endif %}
+  span.page-current
+  | Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+  | {% if page_obj.has_next %}
+  a(href="/?page={{ page_obj.next_page_number }}") next
   | {% endif %}
 {% endblock%}

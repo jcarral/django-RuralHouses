@@ -15,5 +15,7 @@ div
   img(src="{{casa.imagen.url}}", alt="")
   | {% endif %}
   p {{ casa.descripcion }}
-
+  {% if casa.owner.username == user.username %}
+  h1 {{casa.owner.username}}
+  {% endif %}
 {% endblock%}

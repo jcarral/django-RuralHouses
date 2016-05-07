@@ -18,7 +18,7 @@ html
         navbar.header-nav
           | {% if user.is_authenticated %}
           h1.header-nav-titulo ¡ Hola {{ user.username }} !
-          a(href="" class="header-btn new-house")
+          a(href="{% url 'casas:nuevacasa' %}" class="header-btn new-house")
             i.fa.fa-plus
           a(href="{% url 'casas:editarperfil' pk=user.pk %}" class="header-btn edit-profile")
             i.fa.fa-cog

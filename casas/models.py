@@ -12,13 +12,16 @@ class Casa(models.Model):
     publico = models.BooleanField(default=False)
     imagen = models.ImageField(blank=True)
     postcode = models.CharField(max_length=15, blank=True)
-    date = models.DateField(default=date.today, blank=True)
+    fecha = models.DateField(default=date.today, blank=True)
     numeroHabitaciones = models.IntegerField(default=0, blank=True)
     numeroBanios = models.IntegerField(default=0, blank=True)
     wifi = models.BooleanField(default=False)
     parking = models.BooleanField(default=False)
+    mascotas = models.BooleanField(default=False)
+    piscina = models.BooleanField(default=False)
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
+    owner = models.ForeignKey(User)
 
     def __str__(self):
         return self.nombre
@@ -49,3 +52,5 @@ class Perfil(models.Model):
         return self.nombre
     class Meta:
         ordering = ('id', )
+    def get_absolute_url(self):
+        return "/modificar/%i/" % self.id

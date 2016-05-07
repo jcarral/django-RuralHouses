@@ -39,7 +39,7 @@ header{
       @include boton_menu($cMain);
     }
     &.signup{
-      @include boton_menu($aoi);
+      @include boton_menu($cTwitter);
     }
     &.logout{
       @include boton_menu(#fed5d5);
@@ -64,6 +64,7 @@ header{
   height: 150px;
   background-color: $cLightGrey;
   //background: url('/static/images/banner.jpg');
+  box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.3);
   @include flexbox($justify: center, $align: center);
 
   &-opacity{

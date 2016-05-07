@@ -1,0 +1,69 @@
+{% extends "base.jade" %}
+
+{% block page_title %}
+| Añadir casa
+{% endblock %}
+
+{% block section_title %}
+{% if title %}
+{{ title }}
+{%else%}
+| Añadir casa
+{% endif%}
+{% endblock %}
+
+{% if nueva_form.errors %}
+{% for message in nueva_form.errors %}
+h1.t {{message}}
+{% endfor %}
+{% endif %}
+
+{% block content %}
+form(action="", method="POST", enctype="multipart/form-data", class="form")
+  | {% csrf_token %}
+  div.col-2
+    div
+      label(for="{{nueva_form.nombre.id_for_label}}") Nombre
+      {{nueva_form.nombre}}
+    div
+      label(for="{{nueva_form.ciudad.id_for_label}}") Ciudad
+      {{nueva_form.ciudad}}
+  div.col-1
+    label(for="{{nueva_form.direccion.id_for_label}}") Direccion
+    {{nueva_form.direccion}}
+  div.col-4
+    div
+      label(for="{{nueva_form.postcode.id_for_label}}") CP
+      {{nueva_form.postcode}}
+    div
+      label(for="{{nueva_form.numeroHabitaciones.id_for_label}}") Habitaciones
+      {{nueva_form.numeroHabitaciones}}
+    div
+      label(for="{{nueva_form.numeroBanios.id_for_label}}") Baños
+      {{nueva_form.numeroBanios}}
+    div
+      {{nueva_form.imagen}}
+      label(for="{{nueva_form.imagen.id_for_label}}") 
+        i.fa.fa-upload   Subir Imagen
+  div.check-icons
+    div.roundedcheck
+      {{nueva_form.publico}}
+      label(for="{{nueva_form.publico.id_for_label}}" class="eye")
+    div.roundedcheck
+      {{nueva_form.wifi}}
+      label(for="{{nueva_form.wifi.id_for_label}}", class="wifi")
+    div.roundedcheck
+      {{nueva_form.parking}}
+      label(for="{{nueva_form.parking.id_for_label}}" class="parking")
+    div.roundedcheck
+      {{nueva_form.piscina}}
+      label(for="{{nueva_form.piscina.id_for_label}}" class="pool")
+    div.roundedcheck
+      {{nueva_form.mascotas}}
+      label(for="{{nueva_form.mascotas.id_for_label}}" class="pet")
+  div.col-1
+    label(for="{{nueva_form.descripcion.id_for_label}}") Descripcion
+    {{nueva_form.descripcion}}
+  div.col-1
+    button(type="submit" class="submitbtn") Confirmar registro
+{% endblock %}

@@ -6,18 +6,27 @@ from django.views.generic.detail import DetailView
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
-from .forms import UserForm, PerfilForm
+
+from .forms import UserForm, PerfilForm, CasaForm
 from .models import Casa, Perfil
 
+
+#Vista para mostrar la lista de todas las casas
 class CasasList(ListView):
     model = Casa
+    paginate_by = 3
 
-
+#Actualizar el perfil del usuario
 class UsuarioUpdate(UpdateView):
     model = Perfil
-    fields = ['nombre', 'apellido']
+    fields = ['nombre', 'apellido', 'telefono', 'genero', 'nacimiento', 'avatar']
 
+class CasaDetail(DetailView):
+    model = Casa
+
+#Iniciar sesion
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -28,16 +37,36 @@ def user_login(request):
             login(request, user)
             return HttpResponseRedirect('/')
         else:
-            print('Error al introducir los datos')
+            return HttpResponseRedirect('/login')
     else:
         if request.user.is_authenticated():
             return HttpResponseRedirect('/')
         return render(request, 'login.jade', {})
 
+#Cerrar sesion
 @login_required(login_url='/login')
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+#Vista para aniadir una casa nueva
+@login_required(login_url='/login')
+def nueva_casa(request):
+    if request.method == 'POST':
+        nueva_form = CasaForm(data=request.POST)
+        if nueva_form.is_valid():
+            casa = nueva_form.save(commit = False)
+            casa.owner = request.user
+            casa.save()
+            return HttpResponseRedirect('/')
+        else:
+            messages.error(request, "Error")
+    else:
+        nueva_form = CasaForm()
+    return render(request, 'casas/casa_nueva.jade', {'nueva_form': nueva_form,})
+
+
+
 
 def registrar_usuario(request):
     registrado = False
@@ -57,7 +86,7 @@ def registrar_usuario(request):
             registrado = True
             return HttpResponseRedirect('/')
         else:
-            print(user_form.errors, perfil_form.errors)
+            return HttpResponseRedirect('/register')
     #se crea el formulario para que el usuario pueda registrarse
     else:
         user_form = UserForm()
