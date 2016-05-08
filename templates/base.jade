@@ -27,8 +27,8 @@ html
           a(href="{% url 'usuarios:editarperfil' pk=user.perfil.pk %}", class="menu-btn") Mi perfil
           a(href="/logout", class="menu-btn") Salir
           {% else %}
-          a(href="/login", class="menu-btn") Iniciar sesión
-          a(href="/register", class="menu-btn") Registrarse
+          a(href="{% url 'usuarios:login' %}", class="menu-btn") Iniciar sesión
+          a(href="{% url 'usuarios:registro' %}", class="menu-btn") Registrarse
           | {% endif %}
       div.banner
         div.banner-opacity
