@@ -1,3 +1,5 @@
+@import '_datepicker.scss';
+
 .form{
   @include flexbox($dir: column, $wrap: wrap, $align: center);
   max-width: $sMainContainer;
@@ -62,13 +64,22 @@
 
 .col-3{
   width: $sMainContainer;
-  @include flexbox($dir: row, $wrap: wrap);
+  @include flexbox($dir: row, $wrap: wrap, $justify: center);
   div{
-    width: 33%;
+    width: 30%;
     @include flexbox($dir: column);
   }
   div:last-child{
     align-self: flex-end;
+  }
+}
+
+.rows{
+  width: $sMainContainer;
+  @include flexbox($dir: column, $wrap: wrap, $justify: center);
+  div{
+    width: 30%;
+    @include flexbox($dir: column);
   }
 }
 
@@ -131,7 +142,7 @@
     @include square(58px);
     @include absolute($top: 1px, $left: 1px);
     cursor: pointer;
-     background: linear-gradient(top, #222 0%, #45484d 100%);
+     //background: linear-gradient(to bottom, #222 0%, #45484d 100%);
     border-radius: 100%;
     background-color: $wetAsphalt;
     &:after{
@@ -185,4 +196,8 @@ opacity: 1;
 .eye{
   background: lighten($wetAsphalt, 30%) url('/static/images/icons/show.png') center no-repeat;
   opacity: 0.1;
+}
+
+.helptext{
+  visibility: hidden;
 }

@@ -152,3 +152,28 @@ $largeScreen: 1400px;
     }
 
 }
+
+@mixin alert($color: #dbdbdb, $height: 50px, $width: 300px){
+
+  position: relative;
+  height: $height;
+  width: $width;
+  background-color: $color;
+  padding-left: $width/8;
+  line-height: $height;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.2s ease-in-out;
+  i{
+    height: 100%;
+    width: 10%;
+    background-color: darken($color, 15%);
+    font-size: 1.25em;
+    color: darken($color, 40%);
+    text-align: center;
+    line-height: $height;
+    @include absolute($top: 0, $left: 0);
+  }
+  &:hover{
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  }
+}

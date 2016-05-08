@@ -7,27 +7,28 @@ html
     title {% block page_title %}{% endblock %}
     meta(name='description', content='')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel="stylesheet", href="{% static 'css/base.css' %}")
+    link(rel="stylesheet", href="{% static 'css/main.css' %}")
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css")
-    
+    link(rel="icon", type="image/png", href="{% static 'images/icons/favicon.png' %}")
   body
     header
       div.header
         h1.header-titulo 
           a(href="/") RuralHouse's
-        navbar.header-nav
+        div.header-nav
           | {% if user.is_authenticated %}
           h1.header-nav-titulo ¡ Hola {{ user.username }} !
-          a(href="{% url 'casas:nuevacasa' %}" class="header-btn new-house")
-            i.fa.fa-plus
-          a(href="{% url 'casas:editarperfil' pk=user.pk %}" class="header-btn edit-profile")
-            i.fa.fa-cog
-          a(href="/logout" class="header-btn logout")
-            i.fa.fa-times
-          
-          | {% else %}
-          a(href="/login" class="header-btn signin") Iniciar sesión
-          a(href="/register" class="header-btn signup") Registrarse
+          | {% endif %}
+      navbar.menu#navbar
+        div.menu-container
+          a(href="/", class="menu-btn") Inicio
+          | {% if user.is_authenticated %}
+          a(href="{% url 'casas:nuevacasa' %}", class="menu-btn") Añadir casa
+          a(href="{% url 'casas:editarperfil' pk=user.perfil.pk %}", class="menu-btn") Mi perfil
+          a(href="/logout", class="menu-btn") Salir
+          {% else %}
+          a(href="/login", class="menu-btn") Iniciar sesión
+          a(href="/register", class="menu-btn") Registrarse
           | {% endif %}
       div.banner
         div.banner-opacity
@@ -40,3 +41,4 @@ html
         a(href="https://github.com/jcdc21/django-RuralHouses")
           img(src="/static/images/github.png", alt="", class="github-logo")
       div.footer-small
+  script(src="{% static 'js/bundle.js' %}")

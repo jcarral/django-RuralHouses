@@ -28,7 +28,16 @@ class CasaForm(forms.ModelForm):
         self.fields['imagen'].widget.attrs.update({'class': 'inputfile'})
 
 
+
 class PerfilForm(forms.ModelForm):
     class Meta:
         model = Perfil
         fields = ('nombre', 'apellido', 'telefono', 'genero', 'nacimiento', 'avatar', )
+    def __init__(self, *args, **kwargs):
+        super(PerfilForm, self).__init__(*args, **kwargs)
+        self.fields['nombre'].widget.attrs.update({'class': 'form-input'})
+        self.fields['apellido'].widget.attrs.update({'class': 'form-input'})
+        self.fields['telefono'].widget.attrs.update({'class': 'form-input'})
+        self.fields['nacimiento'].widget.attrs.update({'class': 'form-input'})
+        self.fields['genero'].widget.attrs.update({'class': 'form-input'})
+        self.fields['avatar'].widget.attrs.update({'class': 'inputfile'})

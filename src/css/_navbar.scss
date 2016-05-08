@@ -2,7 +2,7 @@ header{
   width: 100%;
   //background-color: $cBrown;
   background-color: #444;
-  border-top: 3px solid $cBrown;
+  //border-top: 3px solid $cBrown;
   @include flexbox($dir: column, $align: center);
 
 }
@@ -80,5 +80,36 @@ header{
     font-size: 32px;
     font-weight: bold;
     //color: white;
+  }
+}
+
+.menu{
+  padding: 0;
+  margin: 0;
+  height: 30px;
+  width: 100%;
+  background: darken(#444, 5%);
+  @include flexbox($justify: center);
+  &-container{
+    width: $sMainContainer;
+  }
+  &-fixed{
+    position: fixed;
+    z-index: 777;
+  }
+
+  &-btn{
+    background-color: lighten(#444, 10%);
+    box-sizing: border-box;
+    border-bottom: 2px solid $peterRiver;
+    line-height: 30px;
+    color: white;
+    font-size: 0.75em;
+    height: 30px;
+    margin: 0;
+    padding: 7px 1em 6px 1em;
+    &:hover{
+      background-color: darken(#444, 5%);
+    }
   }
 }

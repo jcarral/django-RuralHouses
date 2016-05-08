@@ -50,10 +50,10 @@ table {
 @keyframes alertMe {
   from {
     border-width: 3px;
-    border-color: black; }
+    border-color: blue; }
   to {
     border-width: 0;
-    border-color: rgba(0, 0, 0, 0.1); } }
+    border-color: rgba(0, 0, 255, 0.1); } }
 .footer {
   width: 100%; }
   .footer-main {
@@ -535,5 +535,31 @@ a {
 .main {
   padding: 10px;
   box-sizing: border-box; }
+
+.alert {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  background-color: #dd4b39;
+  padding-left: 12.5%;
+  line-height: 50px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 20px; }
+  .alert i {
+    height: 100%;
+    width: 10%;
+    background-color: #ac2d1e;
+    font-size: 1.25em;
+    color: #3f110b;
+    text-align: center;
+    line-height: 50px;
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    position: absolute; }
+  .alert:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
 
 /*# sourceMappingURL=base.css.map */

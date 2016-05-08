@@ -13,9 +13,40 @@
 {% endblock %}
 
 {% block content %}
-form(action="", method="POST", enctype="multipart/form-data")
+{% if messages %}
+{% for message in messages %}
+div.alert {{message}}
+  i.fa.fa-minus-circle
+{% endfor %}
+{% endif %}
+form(action="", method="POST", enctype="multipart/form-data", class="form")
   | {% csrf_token %}
-  | {{ user_form.as_p }}
-  | {{ perfil_form.as_p }}
-  button(type="submit") Confirmar registro
+  div.col-3
+    div
+      label(for="{{user_form.username.id_for_label}}") Usuario
+      {{user_form.username}}
+    div
+      label(for="{{user_form.email.id_for_label}}") Email
+      {{user_form.email}}
+    div
+      label(for="{{user_form.password.id_for_label}}") Contraseña
+      {{user_form.password}}
+  div.col-2
+    div
+      label(for="{{perfil_form.nombre.id_for_label}}") Nombre
+      {{perfil_form.nombre}}
+    div
+      label(for="{{perfil_form.apellido.id_for_label}}") Apellido
+      {{perfil_form.apellido}}
+  div.col-3
+    div
+      label(for="{{perfil_form.telefono.id_for_label}}") Teléfono
+        {{perfil_form.telefono}}
+    div
+      label(for="{{perfil_form.genero.id_for_label}}") Género
+      {{perfil_form.genero}}
+    div
+      label(for="{{perfil_form.nacimiento.id_for_label}}") Fecha de cumpleaños
+        {{perfil_form.nacimiento}}
+  button(type="submit", class="submitbtn") Confirmar registro
 {% endblock %}

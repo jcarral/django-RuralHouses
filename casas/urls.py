@@ -4,7 +4,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^$', views.CasasList.as_view(template_name="casas/casa_list.jade"), name='lista'),
+    url(r'^$', views.index, name='index'),
+    url(r'^lista', views.CasasList.as_view(template_name="casas/casa_list.jade"), name='lista'),
     url(r'^login', views.user_login, name='login'),
     url(r'^logout', views.user_logout, name='logout'),
     url(r'^register', views.registrar_usuario, name='registro'),

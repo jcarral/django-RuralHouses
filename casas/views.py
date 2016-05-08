@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 from .forms import UserForm, PerfilForm, CasaForm
@@ -19,9 +20,15 @@ class CasasList(ListView):
     paginate_by = 3
 
 #Actualizar el perfil del usuario
-class UsuarioUpdate(UpdateView):
+class UsuarioUpdate(LoginRequiredMixin, UpdateView):
     model = Perfil
-    fields = ['nombre', 'apellido', 'telefono', 'genero', 'nacimiento', 'avatar']
+    login_url = '/login/'
+    form_class = PerfilForm
+    redirect_field_name = 'redirect_to'
+    def form_valid(self, form):
+        self.object.save()
+        messages.success(self.request, 'Datos actualizados correctamente')
+        return HttpResponseRedirect(self.get_success_url())
 
 class CasaDetail(DetailView):
     model = Casa
@@ -35,8 +42,10 @@ def user_login(request):
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
+
             return HttpResponseRedirect('/')
         else:
+            messages.error(request, 'El usuario que intentas introducir no existe o la contraseña no es correcta')
             return HttpResponseRedirect('/login')
     else:
         if request.user.is_authenticated():
@@ -65,8 +74,19 @@ def nueva_casa(request):
         nueva_form = CasaForm()
     return render(request, 'casas/casa_nueva.jade', {'nueva_form': nueva_form,})
 
+def index(request):
 
+    if request.method == 'GET' and request.user and request.user.is_authenticated():
+        try:
 
+            user = request.user
+            perfil = request.user.perfil
+            print ("Tiene perfil")
+        except:
+            perfil = Perfil(user=request.user)
+            perfil.save()
+            print ("NO Tiene perfil")
+    return render(request, 'index.jade', {})
 
 def registrar_usuario(request):
     registrado = False
@@ -86,6 +106,7 @@ def registrar_usuario(request):
             registrado = True
             return HttpResponseRedirect('/')
         else:
+            messages.error(request, 'Hay campos incorrectos')
             return HttpResponseRedirect('/register')
     #se crea el formulario para que el usuario pueda registrarse
     else:

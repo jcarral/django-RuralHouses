@@ -1,16 +1,50 @@
 {% extends "base.jade" %}
 
 {% block page_title %}
+| Perfil: {{ user.username}}
+{% endblock %}
+
+{% block section_title %}
 {% if title %}
-{{ casa.nombre }}
+{{ title }}
 {%else%}
-| Casas rurales
+| Editar perfil
 {% endif%}
 {% endblock %}
 
 {% block content %}
-form(action="", method="POST", enctype="multipart/form-data")
+
+{% if messages %}
+{% for message in messages %}
+div(class="alert-{{message.tags}}") {{message}}
+  i.fa.fa-minus-circle
+{% endfor %}
+{% endif %}
+
+form(action="", method="POST", enctype="multipart/form-data", class="form")
   | {% csrf_token %}
-  | {{ form.as_p }}
-  button(type="submit") Actualizar usuario
+  div
+    img(src="{{ user.perfil.avatar.url }}", alt="", class="form-avatar")
+    {{form.avatar}}
+    label(for="{{form.avatar.id_for_label}}") 
+      i.fa.fa-upload   Actualizar imagen
+  div.col-2
+    div
+      label(for="{{form.nombre.id_for_label}}") Nombre
+      {{form.nombre}}
+    div
+      label(for="{{form.apellido.id_for_label}}") Apellido
+      {{form.apellido}}
+  div.col-3
+    div
+      label(for="{{form.telefono.id_for_label}}") Teléfono
+        {{form.telefono}}
+    div
+      label(for="{{form.genero.id_for_label}}") Género
+      {{form.genero}}
+    div
+      label(for="{{form.nacimiento.id_for_label}}") Fecha de cumpleaños
+        {{form.nacimiento}}
+      
+  button(type="submit", class="submitbtn") Actualizar usuario
 {% endblock %}

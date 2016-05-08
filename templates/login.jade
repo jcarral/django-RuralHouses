@@ -13,6 +13,13 @@
 {% endblock %}
 
 {% block content %}
+
+{% if messages %}
+{% for message in messages %}
+div(class="alert-{{message.tags}}") {{message}}
+  i.fa.fa-minus-circle
+{% endfor %}
+{% endif %}
 form(action="", method="post", class="login")
   | {% csrf_token %}
   div.login-fields
