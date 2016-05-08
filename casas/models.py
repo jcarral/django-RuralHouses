@@ -28,3 +28,30 @@ class Casa(models.Model):
 
     class Meta:
         ordering = ('id', )
+
+class Oferta(models.Model):
+    fechaInicio = models.DateField()
+    fechaFin = models.DateField()
+    fechaCreada = models.DateField(default=date.today)
+    precio = models.FloatField(null=True)
+    casaOfertada = models.ForeignKey(Casa)
+
+    def __str__(self):
+        return self.nombre
+    class Meta:
+        ordering = ('id', 'precio', )
+
+class Favorito(models.Model):
+    fechaCreado = models.DateField(default=date.today)
+    casaFavorito = models.ForeignKey(Casa)
+    usuarioFavorito = models.ForeignKey(User)
+
+    def __str__(self):
+        return self.casaFavorito.nombre + ' gusta a ' + self.usuarioFavorito.username
+
+    class Meta:
+        ordering = ('id', )
+
+class Imagenes(models.Model):
+    imagen = models.ImageField(blank=True)
+    casaImagen = models.ForeignKey(Casa)
