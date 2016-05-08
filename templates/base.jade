@@ -24,7 +24,7 @@ html
           a(href="/", class="menu-btn") Inicio
           | {% if user.is_authenticated %}
           a(href="{% url 'casas:nuevacasa' %}", class="menu-btn") Añadir casa
-          a(href="{% url 'casas:editarperfil' pk=user.perfil.pk %}", class="menu-btn") Mi perfil
+          a(href="{% url 'usuarios:editarperfil' pk=user.perfil.pk %}", class="menu-btn") Mi perfil
           a(href="/logout", class="menu-btn") Salir
           {% else %}
           a(href="/login", class="menu-btn") Iniciar sesión

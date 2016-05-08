@@ -29,6 +29,7 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = (
+    'usuarios.apps.UsuariosConfig',
     'casas.apps.CasasConfig',
     'django.contrib.admin',
     'django.contrib.auth',
