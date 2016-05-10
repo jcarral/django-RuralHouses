@@ -9,6 +9,4 @@ urlpatterns = [
     url(r'^nueva', views.nueva_casa, name='nuevacasa'),
     url(r'^casa/(?P<pk>[0-9]+)/$', views.CasaDetail.as_view(template_name="casas/casa_detail.jade"), name='detail'),
 
-    #url(r'^casa/(?P<pk>[0-9]+)/$', views.CasaDetail.as_view(template_name="casas/casa_detail.jade"), name='detail'),
-    #url(r'^casa/new', views.new_house, name='nueva')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

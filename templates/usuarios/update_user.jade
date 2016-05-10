@@ -8,7 +8,7 @@
 {% if title %}
 {{ title }}
 {%else%}
-| Editar perfil
+| Editar perfil: {{user.username}}
 {% endif%}
 {% endblock %}
 
@@ -16,35 +16,55 @@
 
 {% if messages %}
 {% for message in messages %}
+{% if message.tags == "error" %}
 div(class="alert-{{message.tags}}") {{message}}
   i.fa.fa-minus-circle
+{% else %}
+div(class="alert-{{message.tags}}") {{message}}
+  i.fa.fa-check-circle-o
+{% endif %}
 {% endfor %}
 {% endif %}
 
-form(action="", method="POST", enctype="multipart/form-data", class="form")
+form(action="", method="POST", enctype="multipart/form-data", class="container")
   | {% csrf_token %}
-  div
-    img(src="{{ user.perfil.avatar.url }}", alt="", class="form-avatar")
-    {{form.avatar}}
-    label(for="{{form.avatar.id_for_label}}") 
-      i.fa.fa-upload   Actualizar imagen
-  div.col-2
-    div
+  {% if user.perfil.avatar %}
+  img(src="{{ user.perfil.avatar.url }}", alt="", class="form-avatar u-full-width")
+  {% else %}
+  img(src="/static/images/default_avatar.png", alt="", class="twelve u-full-width")
+  {% endif %}
+  div.row
+    div.twelve.columns
+      {{form.avatar}}
+      label(for="{{form.avatar.id_for_label}}") 
+        i.fa.fa-upload   Actualizar imagen
+  div.row
+    div.six.columns
       label(for="{{form.nombre.id_for_label}}") Nombre
       {{form.nombre}}
-    div
+    div.six.columns
       label(for="{{form.apellido.id_for_label}}") Apellido
       {{form.apellido}}
-  div.col-3
-    div
+  div.row
+    div.four.columns
       label(for="{{form.telefono.id_for_label}}") Teléfono
-        {{form.telefono}}
-    div
+      {{form.telefono}}
+    div.four.columns
       label(for="{{form.genero.id_for_label}}") Género
       {{form.genero}}
-    div
+    div.four.columns
       label(for="{{form.nacimiento.id_for_label}}") Fecha de cumpleaños
-        {{form.nacimiento}}
-      
-  button(type="submit", class="submitbtn") Actualizar usuario
+      {{form.nacimiento}}
+  div.row
+    div.four.columns
+      label(for="{{form.website.id_for_label}}") Página web
+      {{form.website}}
+    div.four.columns
+      label(for="{{form.twitterAccount.id_for_label}}") Twitter
+      {{form.twitterAccount}}
+    div.four.columns
+      label(for="{{form.facebookAccount.id_for_label}}") Facebook
+      {{form.facebookAccount}}
+   div.row    
+    button(type="submit", class="button-primary twelve columns") Actualizar usuario
 {% endblock %}

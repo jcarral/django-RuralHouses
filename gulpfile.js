@@ -64,7 +64,7 @@ gulp.task('build:js', function() {
 /* Watch Files For Changes */
 gulp.task('watch', ['build:js'], function() {
     livereload.listen();
-    gulp.watch('src/css/*.scss', ['sass']);
+    gulp.watch('src/css/**/*.scss', ['sass']);
 });
 
 gulp.task('default', ['sass', 'watch']);

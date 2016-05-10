@@ -12,6 +12,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import UserForm, PerfilForm
 from .models import Perfil
+from casas.models import Casa, Favorito
 
 
 #Actualizar el perfil del usuario
@@ -24,6 +25,18 @@ class UsuarioUpdate(LoginRequiredMixin, UpdateView):
         self.object.save()
         messages.success(self.request, 'Datos actualizados correctamente')
         return HttpResponseRedirect(self.get_success_url())
+    def get_queryset(self):
+        base_qs = super(UsuarioUpdate, self).get_queryset()
+        return base_qs.filter(user=self.request.user)
+
+class UsuarioFicha(DetailView):
+    model = Perfil
+    context_object_name = 'perfil'
+    def get_context_data(self, **kwargs):
+        context = super(UsuarioFicha, self).get_context_data(**kwargs)
+        context['casas'] = Casa.objects.all().filter(owner__perfil=context['perfil'])
+        context['favoritos'] = Favorito.objects.all().filter(usuarioFavorito__perfil=context['perfil'])
+        return context
 
 #Iniciar sesion
 def user_login(request):

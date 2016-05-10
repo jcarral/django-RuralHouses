@@ -16,33 +16,41 @@
 
 {% if messages %}
 {% for message in messages %}
+{% if message.tags == "error" %}
 div(class="alert-{{message.tags}}") {{message}}
   i.fa.fa-minus-circle
+{% else %}
+{{messages.tags}}
+div(class="alert-{{message.tags}}") {{message}}
+  i.fa.fa-check-circle-o
+{% endif %}
 {% endfor %}
 {% endif %}
-form(action="", method="POST", enctype="multipart/form-data", class="form")
+form(action="", method="POST", enctype="multipart/form-data", class="container")
   | {% csrf_token %}
-  div.col-2
-    div
+  div.row
+    div.twelve.columns
       label(for="{{nueva_form.nombre.id_for_label}}") Nombre
       {{nueva_form.nombre}}
-    div
+
+  div.row
+    div.four.columns
+      label(for="{{nueva_form.direccion.id_for_label}}") Direccion
+      {{nueva_form.direccion}}
+    div.four.columns
       label(for="{{nueva_form.ciudad.id_for_label}}") Ciudad
       {{nueva_form.ciudad}}
-  div.col-1
-    label(for="{{nueva_form.direccion.id_for_label}}") Direccion
-    {{nueva_form.direccion}}
-  div.col-4
-    div
+    div.four.columns
       label(for="{{nueva_form.postcode.id_for_label}}") CP
       {{nueva_form.postcode}}
-    div
+  div.row  
+    div.four.columns
       label(for="{{nueva_form.numeroHabitaciones.id_for_label}}") Habitaciones
       {{nueva_form.numeroHabitaciones}}
-    div
+    div.four.columns
       label(for="{{nueva_form.numeroBanios.id_for_label}}") Baños
       {{nueva_form.numeroBanios}}
-    div
+    div.four.columns
       {{nueva_form.imagen}}
       label(for="{{nueva_form.imagen.id_for_label}}") 
         i.fa.fa-upload   Subir Imagen
@@ -62,9 +70,10 @@ form(action="", method="POST", enctype="multipart/form-data", class="form")
     div.roundedcheck
       {{nueva_form.mascotas}}
       label(for="{{nueva_form.mascotas.id_for_label}}" class="pet")
-  div.col-1
-    label(for="{{nueva_form.descripcion.id_for_label}}") Descripcion
-    {{nueva_form.descripcion}}
-  div.col-1
-    button(type="submit" class="submitbtn") Confirmar registro
+  div.row
+    div.twelve.columns
+      label(for="{{nueva_form.descripcion.id_for_label}}") Descripcion
+      {{nueva_form.descripcion}}
+  div.row
+    button(type="submit" class="button-primary twelve columns") Confirmar registro
 {% endblock %}

@@ -15,38 +15,60 @@
 {% block content %}
 {% if messages %}
 {% for message in messages %}
-div.alert {{message}}
+{% if message.tags == "error" %}
+div(class="alert-{{message.tags}}") {{message}}
   i.fa.fa-minus-circle
+{% else %}
+div(class="alert-{{message.tags}}") {{message}}
+  i.fa.fa-check-circle-o
+{% endif %}
 {% endfor %}
 {% endif %}
-form(action="", method="POST", enctype="multipart/form-data", class="form")
+form(action="", method="POST", enctype="multipart/form-data", class="container u-full-width")
   | {% csrf_token %}
-  div.col-3
-    div
+  div.row
+    div.six.columns
       label(for="{{user_form.username.id_for_label}}") Usuario
       {{user_form.username}}
-    div
+    div.six.columns
       label(for="{{user_form.email.id_for_label}}") Email
       {{user_form.email}}
-    div
+  div.row
+    div.six.columns
       label(for="{{user_form.password.id_for_label}}") Contraseña
       {{user_form.password}}
-  div.col-2
-    div
+    div.six.columns
+      label(for="{{user_form.password.id_for_label}}") Repite contraseña
+      {{user_form.password}}
+  div.row
+    div.six.columns
       label(for="{{perfil_form.nombre.id_for_label}}") Nombre
       {{perfil_form.nombre}}
-    div
+    div.six.columns
       label(for="{{perfil_form.apellido.id_for_label}}") Apellido
       {{perfil_form.apellido}}
-  div.col-3
-    div
+  div.row
+    div.four.columns
       label(for="{{perfil_form.telefono.id_for_label}}") Teléfono
         {{perfil_form.telefono}}
-    div
+    div.four.columns
       label(for="{{perfil_form.genero.id_for_label}}") Género
       {{perfil_form.genero}}
-    div
+    div.four.columns
       label(for="{{perfil_form.nacimiento.id_for_label}}") Fecha de cumpleaños
         {{perfil_form.nacimiento}}
-  button(type="submit", class="submitbtn") Confirmar registro
+  div.row
+    div.four.columns
+      label(for="{{form.website.id_for_label}}") Página web
+      {{perfil_form.website}}
+    div.four.columns
+      label(for="{{form.twitterAccount.id_for_label}}") Twitter
+        i.fa.fa-twitter
+      {{perfil_form.twitterAccount}}
+    div.four.columns
+      label(for="{{form.facebookAccount.id_for_label}}") Facebook
+        i.fa.fa-facebook
+      {{perfil_form.facebookAccount}}
+        
+  button(type="submit", class="button-primary u-full-width") Confirmar registro
 {% endblock %}

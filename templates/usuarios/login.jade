@@ -20,22 +20,23 @@ div(class="alert-{{message.tags}}") {{message}}
   i.fa.fa-minus-circle
 {% endfor %}
 {% endif %}
-form(action="", method="post", class="login")
+form(action="", method="post", class="container")
   | {% csrf_token %}
-  div.login-fields
-    input(type="text", name="username", placeholder="Nombre de usuario...")
-    input(type="password", name="password", placeholder="Contraseña...")
-    button(type="submit", class="login-btn") Login
-  div.login-social
-    a(href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}", class="login-social-btn twitter-btn")
-      i.fa.fa-twitter
-    a(href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}", class="login-social-btn facebook-btn")
-      i.fa.fa-facebook-square
-    a(href="{% url 'social:begin' 'github' %}?next={{ request.path }}", class="login-social-btn github-btn")
-      i.fa.fa-github-alt
-    a(href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}", class="login-social-btn google-btn")
-      i.fa.fa-google-plus
-div.register
+  div.row
+    div.six.columns.login
+      input(type="text", name="username", placeholder="Nombre de usuario...", class="u-full-width")
+      input(type="password", name="password", placeholder="Contraseña...", class="u-full-width")
+      button(type="submit", class="button-primary u-full-width") Login
+    div.six.columns.login-social
+      a(href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}", class="login-social-btn twitter-btn")
+        i.fa.fa-twitter
+      a(href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}", class="login-social-btn facebook-btn")
+        i.fa.fa-facebook-square
+      a(href="{% url 'social:begin' 'github' %}?next={{ request.path }}", class="login-social-btn github-btn")
+        i.fa.fa-github-alt
+      a(href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}", class="login-social-btn google-btn")
+        i.fa.fa-google-plus
+div.register.u-full-width
   h3.register-titulo ¿ No estás registrado aún ?
   a(href="{% url 'usuarios:registro' %}" class="register-btn") Registrarse
 {% endblock%}

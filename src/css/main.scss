@@ -1,13 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
 @import url(https://fonts.googleapis.com/css?family=Lato:400,900);
-@import "_reset.scss";
-@import '_variables.scss';
-@import '_mixins.scss';
-@import '_footer.scss';
-@import "_navbar.scss";
-@import '_list_casas.scss';
-@import '_login.scss';
-@import '_form.scss';
+@import "skeleton.scss";
+@import "reset.scss";
+@import 'variables.scss';
+@import 'mixins.scss';
+@import 'footer.scss';
+@import "navbar.scss";
+@import 'list_casas.scss';
+@import 'login.scss';
+@import 'form.scss';
+@import 'perfil-usuario';
+@import 'pages/index';
 
 body{
   width: 100%;
@@ -16,13 +19,9 @@ body{
   @include flexbox($dir: column, $justify: space-between, $align: center);
   box-sizing: border-box;
   font-family: 'Lato';
-  background-color: #f5f5f5;
+  background-color: $cBody;
 }
 
-img{
-  max-width: 200px;
-  max-height: 200px;
-}
 
 a{
   text-decoration: none;
@@ -34,12 +33,14 @@ a{
   //box-shadow: 0px 2px 14px -6px rgba(0,0,0,0.5);
   padding: 10px;
   box-sizing: border-box;
+  max-width: 960px;
 }
 
 
 .alert{
   &-error{
-    @include alert($color: $cGoogle, $width: 100%);
+    @include alert($color: $cGoogle, $width: 80%);
+    margin: auto;
     margin-bottom: 20px;
   }
   &-success{

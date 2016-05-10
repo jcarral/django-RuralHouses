@@ -8,6 +8,30 @@
 {% endif%}
 {% endblock %}
 
+{% block section_title %}
+{% if title %}
+{{ title }}
+{%else%}
+| RuralHouses blablabla
+{% endif%}
+{% endblock %}
+
 {% block content %}
-h1(id="draggable") holaaaa
+section.home
+  div.home-facade
+  img(src="/static/images/fondo.jpg", alt="")
+  div.home-busqueda
+    form(action="/lista", method="get", class="container")
+      div.row
+        input(type="text", placeholder="Buscar casa", class="form-input five columns", name="name")
+        input(type="text", placeholder="Ciudad", class="form-input four columns", name="city")
+        button(type="submit", class="button-primary three columns") Buscar casa
+    form(action="", method="post", class="container")
+      | {% csrf_token %}
+      div.row
+        input(type="text", placeholder="Ciudad", class="form-input four columns")
+        input(type="text", placeholder="Fecha inicio", class="form-input two columns", id="busqueda_fechaInicio")
+        input(type="text", placeholder="Fecha fin", class="form-input two columns", id="busqueda_fechaFin")
+        button(type="submit", class="button-primary four columns") Buscar oferta
+  
 {% endblock%}

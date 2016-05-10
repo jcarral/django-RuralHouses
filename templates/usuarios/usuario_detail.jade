@@ -1,0 +1,55 @@
+{% extends "base.jade" %}
+
+{% block page_title %}
+| Perfil: {{perfil.user.username}}
+{% endblock %}
+
+{% block section_title %}
+{% if title %}
+{{ title }}
+{%else%}
+| Perfil: {{perfil.user.username}}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+section.container.perfil-info
+  h3.perfil-info-titulo Detalles
+    |{% if perfil == user.perfil %}
+    a(href="{% url 'usuarios:editarperfil' pk=perfil.id %}")
+      i.fa.fa-pencil-square-o
+    |{% endif %}
+  div.row.perfil-inner
+    {% if user.perfil.avatar %}
+    img(src="{{ user.perfil.avatar.url }}", alt="", class="four columns", height="200px", width="200px")
+    {% else %}
+    img(src="/static/images/default_avatar.png", alt="", class="four columns",  height="200px", width="200px")
+    {% endif %}
+section.perfil-list.container
+  h3.perfil-list-titulo Lista de casas de {{perfil.user.username}}
+  {% if casas|length > 0 %}
+  ul.u-full-width.perfil-inner
+    |{% for casa in casas %}
+    li.row
+      a(href="{% url 'casas:detail' pk=casa.id %}" class="four columns"){{casa.nombre}}
+      p.four.columns {{casa.ciudad}}
+      p.four.columns {{casa.direccion}}
+    |{%endfor%}
+  {% else %}
+  p Casas no disponibles
+  {% endif %}
+section.perfil-list.container
+  h3.perfil-list-titulo Lista de casas favoritas de  {{perfil.user.username}}
+  {% if favoritos|length > 0 %}
+  ul.u-full-width.perfil-inner
+    |{% for fav in favoritos %}
+    li
+      i.fa.fa-heart.fav
+      &nbsp;&nbsp;{{perfil.user.username}} ha añadido como favorito la casa {{fav.casaFavorito.nombre}}
+    |{%endfor%}
+  {% else %}
+  p {{perfil.user.username}} no tiene casas favoritas
+  {% endif %}
+
+{% endblock %}

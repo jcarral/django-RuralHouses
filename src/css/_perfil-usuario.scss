@@ -1,0 +1,50 @@
+.perfil{
+  &-list, &-info{
+    //border: 1px solid $charcoal;
+    margin: 10px 0;
+    //min-height: 100px;
+    background-color: $cWhite;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    &-titulo{
+      background-color: $peterRiver;
+      word-spacing: 2px;
+      padding: 0.5em;
+    }
+  }
+
+
+  &-list>ul>li{
+    padding: 10px;
+    &:nth-child(odd){
+      background-color: #ececec;
+    }
+  }
+  &-info-titulo{
+    @include flexbox($dir: row, $justify: space-between, $align: center)
+    a{
+      $colorEdit: #c83709;
+      background-color: $clouds;
+      border-radius: 3px;
+      padding: 4px 6px;
+      border: 1px solid darken($clouds, 10%);
+      color: $colorEdit;
+      transition: all 0.3s ease;
+      &:hover{
+        color: darken($colorEdit, 10%);
+        transform: scale(1.3);
+      }
+    }
+  }
+}
+section[class^="perfil-"]{
+
+}
+
+.fav{
+  color: #f465d6;
+  transition: all 0.3s ease;
+  &:hover{
+    color: darken(#f465d6, 30%);
+    transform: scale(1.5);
+  }
+}

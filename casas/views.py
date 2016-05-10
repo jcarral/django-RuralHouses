@@ -17,7 +17,22 @@ from usuarios.models import Perfil
 #Vista para mostrar la lista de todas las casas
 class CasasList(ListView):
     model = Casa
-    paginate_by = 3
+    paginate_by = 5
+    context_object_name = 'casas'
+    #Filtra las todas las casas segun los parametros que recibe con el GET
+    def get_queryset(self):
+            result = super(CasasList, self).get_queryset()
+            name = self.request.GET.get('name')
+            city = self.request.GET.get('city')
+            if name is not None and city is not None:
+                query = result.filter(nombre__icontains=name, ciudad__icontains=city)
+            elif name is not None:
+                query = result.filter(nombre__icontains=name)
+            elif city is not None:
+                query = result.filter(ciudad__icontains=city)
+            else:
+                query = result
+            return query
 
 class CasaDetail(DetailView):
     model = Casa
@@ -43,12 +58,9 @@ def index(request):
 
     if request.method == 'GET' and request.user and request.user.is_authenticated():
         try:
-
             user = request.user
             perfil = request.user.perfil
-            print ("Tiene perfil")
         except:
             perfil = Perfil(user=request.user)
             perfil.save()
-            print ("NO Tiene perfil")
     return render(request, 'index.jade', {})

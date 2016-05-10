@@ -24868,13 +24868,18 @@ var jQuery = $;
 (0, _navbar2.default)();
 
 $(function () {
-    $("#id_nacimiento").datepicker({
-        inline: true,
-        showOtherMonths: true,
-        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-    });
 
-    $("#draggable").draggable();
+  var dateInfo = {
+    inline: true,
+    showOtherMonths: true,
+    dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+  };
+
+  $("#id_nacimiento").datepicker(dateInfo);
+  $("#busqueda_fechaInicio").datepicker(dateInfo);
+  $("#busqueda_fechaFin").datepicker(dateInfo);
+
+  $("#draggable").draggable();
 });
 
 },{"./navbar.js":4,"jquery":2,"jquery-ui":1}],4:[function(require,module,exports){

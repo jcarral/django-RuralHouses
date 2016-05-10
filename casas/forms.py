@@ -20,4 +20,5 @@ class CasaForm(forms.ModelForm):
         self.fields['postcode'].widget.attrs.update({'class': 'form-input'})
         self.fields['numeroBanios'].widget.attrs.update({'class': 'form-input'})
         self.fields['numeroHabitaciones'].widget.attrs.update({'class': 'form-input'})
+        self.fields['descripcion'].widget.attrs.update({'class': 'u-full-width form-input'})
         self.fields['imagen'].widget.attrs.update({'class': 'inputfile'})

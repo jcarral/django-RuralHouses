@@ -1,11 +1,12 @@
 .login{
-  width: $sMainContainer;
 
-
+  padding: 1em;
+  @include flexbox($dir:column, $align:center, $justify: center)
+  height: 100%;
   &-btn{
     height: 50px;
     background-color: #17c;
-    width: 400px;
+    width: 100%;
     outline: 0;
     border: 0;
     font-weight: bolder;
@@ -19,42 +20,20 @@
     }
   }
 
-
-  &-fields{
-    @include flexbox($dir: column, $wrap: wrap, $justify: center, $align: flex-end);
-    width: 450px;
-    padding: 0 2em 0 0;
-  }
-
-  @include flexbox($dir: row, $justify: center, $wrap: wrap, $align: center);
-  input{
-    border: 1px;
-    border-style: solid;
-    background-color: #fff;
-    border-color: #bbb;
-    color: #555;
+  &-social{
+    position: relative;
+    border-left: 2px solid $charcoal;
     padding: 1em;
     box-sizing: border-box;
-    width: 400px;
-    outline: 0;
-    font-size: 0.95em;
-    margin-bottom: 10px;
-  }
+    @include flexbox($dir:column, $align:center, $justify: center)
 
-  &-social{
-    @include flexbox($dir: column, $justify: center, $wrap: wrap);
-    width: 450px;
-    border-left: 3px solid $cDarkGrey;
-    position: relative;
-    padding: 2em 0 2em 2em;
-    box-sizing: border-box;
     &:after{
       content: "or";
       padding: 5px 0;
       position: absolute;
       top: 40%;
       left: -10px;
-      background-color: white;
+      background-color: $cBody;
     }
 
     &-btn{
@@ -116,7 +95,7 @@
     background-color: $emerald;
     padding: 5px;
     height: 30px;
-    width: 75%;
+    width: 50%;
     text-align: center;
     font-weight: bolder;
     color: white;

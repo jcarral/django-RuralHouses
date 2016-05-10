@@ -1,88 +1,14 @@
 @import '_datepicker.scss';
 
-.form{
-  @include flexbox($dir: column, $wrap: wrap, $align: center);
-  max-width: $sMainContainer;
-
-  &-input, textarea{
-    background:#f8f8f8;
-    border:1px solid rgba(0, 0, 0, 0.075);
-    transition: all 0.4s;
-    padding: 1em;
-    width: 80%;
-    font-size: 1em;
-
-    &:hover{
-      border:1px solid $peterRiver;
-    }
-    &:focus{
-      color: #676767;
-      outline: none;
-      border:1px solid $peterRiver;
-    }
-  }
-
-  >div{
-    margin-bottom: 20px;
-  }
-  label{
-    margin-bottom: 5px;
+form.container{
+  img{
+    margin-left: ($sMainContainer/2)-250px;
   }
 }
-
-.col-2{
-  width: $sMainContainer;
-  @include flexbox($dir: row, $wrap: wrap);
-  div{
-    width: 50%;
-    @include flexbox($dir: column);
-  }
+.form-input{
+  width: 100%;
+  margin-top: 10px;
 }
-
-.col-1{
-  width: $sMainContainer;
-  @include flexbox($dir: column);
-  >input{
-    width: 90%;
-  }
-  >textarea{
-    width: 90%;
-  }
-}
-
-.col-4{
-  width: $sMainContainer;
-  @include flexbox($dir: row, $wrap: wrap);
-  div{
-    width: 25%;
-    @include flexbox($dir: column);
-  }
-  div:last-child{
-    align-self: flex-end;
-  }
-}
-
-.col-3{
-  width: $sMainContainer;
-  @include flexbox($dir: row, $wrap: wrap, $justify: center);
-  div{
-    width: 30%;
-    @include flexbox($dir: column);
-  }
-  div:last-child{
-    align-self: flex-end;
-  }
-}
-
-.rows{
-  width: $sMainContainer;
-  @include flexbox($dir: column, $wrap: wrap, $justify: center);
-  div{
-    width: 30%;
-    @include flexbox($dir: column);
-  }
-}
-
 .inputfile {
 	width: 0.1px;
 	height: 0.1px;
@@ -130,6 +56,7 @@
 .check-icons{
   width: 100%;
   @include flexbox($dir: row, $align: center, $justify: space-around);
+  margin-bottom: 10px;
 }
 .roundedcheck{
   $size: 60px; //Tiene que ser par
