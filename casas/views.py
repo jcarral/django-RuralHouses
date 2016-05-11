@@ -8,10 +8,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+import time
+import json
 
 from .forms import CasaForm
-from .models import Casa
+from .models import Casa, Favorito
 from usuarios.models import Perfil
 
 #Vista para mostrar la lista de todas las casas
@@ -64,3 +65,32 @@ def index(request):
             perfil = Perfil(user=request.user)
             perfil.save()
     return render(request, 'index.jade', {})
+
+def gestionar_favoritos(request):
+    if request.method == 'POST':
+        author = request.user
+        casaID = request.POST.get('id')
+        casa = Casa.objects.all().filter(id=casaID).first()
+        favs = Favorito.objects.all().filter(casaFavorito=casa, usuarioFavorito=author)
+        if len(favs) == 0:
+            fav = Favorito(casaFavorito=casa, usuarioFavorito=author)
+            fav.save()
+            response_data = {
+            }
+            response_data['text'] = 'Oferta creada correctamente'
+            response_data['date'] = time.strftime("%H:%M:%S")
+            return HttpResponse(
+                json.dumps(response_data),
+                content_type="application/json"
+            )
+        else:
+            favs.delete()
+            return HttpResponse(
+                json.dumps({"text": "Borrada"}),
+                content_type="application/json"
+            )
+    else:
+        return HttpResponse(
+            json.dumps({"nothing to see": "this isn't happening"}),
+            content_type="application/json"
+        )

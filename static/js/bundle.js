@@ -24880,6 +24880,52 @@ $(function () {
   $("#busqueda_fechaFin").datepicker(dateInfo);
 
   $("#draggable").draggable();
+
+  var getCookie = function getCookie(c_name) {
+    if (document.cookie.length > 0) {
+      var c_start = document.cookie.indexOf(c_name + "=");
+      if (c_start != -1) {
+        c_start = c_start + c_name.length + 1;
+        var c_end = document.cookie.indexOf(";", c_start);
+        if (c_end == -1) c_end = document.cookie.length;
+        return unescape(document.cookie.substring(c_start, c_end));
+      }
+    }
+    return "";
+  };
+
+  $.ajaxSetup({
+    headers: { "X-CSRFToken": getCookie("csrftoken") }
+  });
+
+  $("#favbtn").on("click", function (event) {
+    event.preventDefault();
+    console.log("Favoritos click");
+    crear_favorito();
+  });
+
+  var crear_favorito = function crear_favorito() {
+    console.log("Creando favorito");
+    var data = {
+      'id': $('#favbtn').attr('data-idcasa'),
+      'csrfmiddlewaretoken': $('#csrf').val()
+    };
+    console.log(data);
+
+    $.ajax({
+      url: '/fav/',
+      type: 'POST',
+      data: data,
+      success: function success(json) {
+        console.log("Fav guardado");
+        console.log(json);
+      },
+      error: function error(xhr, errmsg, err) {
+        console.log('Error');
+        console.log(xhr);
+      }
+    });
+  };
 });
 
 },{"./navbar.js":4,"jquery":2,"jquery-ui":1}],4:[function(require,module,exports){

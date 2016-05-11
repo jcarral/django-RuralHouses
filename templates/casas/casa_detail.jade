@@ -18,4 +18,10 @@ div
   {% if casa.owner.username == user.username %}
   h1 {{casa.owner.username}}
   {% endif %}
+  {% if user.is_authenticated %}
+  form(action="/fav/", method="POST")
+    {% csrf_token %}
+    input(type="hidden" value="{{ csrf_token }}", id="csrf")
+    button(id="favbtn", data-idcasa="{{casa.id}}") Fav
+  {% endif %}
 {% endblock%}
