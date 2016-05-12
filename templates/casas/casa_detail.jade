@@ -8,20 +8,58 @@
 {% endif%}
 {% endblock %}
 
+{% block section_title %}
+{% if title %}
+{{ title }}
+{%else%}
+{{ casa.nombre }}
+{% endif%}
+{% endblock %}
+
 {% block content %}
 
-div
-  | {%if casa.imagen %}
-  img(src="{{casa.imagen.url}}", alt="")
-  | {% endif %}
-  p {{ casa.descripcion }}
-  {% if casa.owner.username == user.username %}
-  h1 {{casa.owner.username}}
-  {% endif %}
-  {% if user.is_authenticated %}
-  form(action="/fav/", method="POST")
-    {% csrf_token %}
-    input(type="hidden" value="{{ csrf_token }}", id="csrf")
-    button(id="favbtn", data-idcasa="{{casa.id}}") Fav
-  {% endif %}
+div.container.casa
+  section.casa-container.box
+    h3.casa-titulo Imagenes 
+    | {%if casa.imagen %}
+    ul.bxslider.casa-image-container
+      li 
+        img(src="{{casa.imagen.url}}", alt="")
+      li
+        img(src="{{casa.imagen.url}}", alt="")
+    {% else %}
+    img(src="/static/images/casa_generica.png", alt="", class="twelve.columns")
+    | {% endif %}
+  section.casa-info.box
+    h3.casa-titulo Información de la casa
+    {% if user.is_authenticated %}
+    form(action="/fav/", method="POST")
+      {% csrf_token %}
+      button(id="favbtn", data-idcasa="{{casa.id}}", class="{% if fav > 0 %} favorito-selected {% endif %} btn-fav")
+        i.fa.fa-heart
+    {% endif %}
+    {% if casa.owner.username == user.username %}
+    div(class="offer box", id="offer-container" )
+      h5 Añadir oferta
+        i.fa.fa-times#offer-close
+      form(action="/nuevaoferta", method="POST", class="offer-box")
+        {% csrf_token %}
+        input(type="text", id="of-fechaInicio", placeholder="Fecha inicio")
+        input(type="text", id="of-fechaFin", placeholder="Fecha fin")
+        input(type="number", placeholder="Precio", id="of-precio")
+        button(class="offer-btn", data-idcasa="{{casa.id}}", id="newOffer", type="submit") Crear oferta
+
+    {% endif %}
+  section.casa-ofertas#offer-list
+    h3.casa-titulo Ofertas 
+    {% if ofertas %}
+    {% for oferta in ofertas %}
+    div.offer-item.row
+      p.columns.four{{oferta.fechaInicio}} 
+      p.columns.four{{oferta.precio}}
+      p.columns.four{{oferta.fechaFin}}
+    {% endfor%}
+    {% else %}
+    p No hay ofertas disponibles para la casa
+    {% endif %}
 {% endblock%}

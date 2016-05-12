@@ -18,6 +18,9 @@
     &-info{
       @include flexbox($dir: column);
     }
+    img{
+      @include square(200px);
+    }
   }
 
 

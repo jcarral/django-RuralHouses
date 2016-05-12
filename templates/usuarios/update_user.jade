@@ -17,10 +17,10 @@
 {% if messages %}
 {% for message in messages %}
 {% if message.tags == "error" %}
-div(class="alert-{{message.tags}}") {{message}}
+div(class="alert-{{message.tags}} container") {{message}}
   i.fa.fa-minus-circle
 {% else %}
-div(class="alert-{{message.tags}}") {{message}}
+div(class="alert-{{message.tags}} container") {{message}}
   i.fa.fa-check-circle-o
 {% endif %}
 {% endfor %}
@@ -29,9 +29,9 @@ div(class="alert-{{message.tags}}") {{message}}
 form(action="", method="POST", enctype="multipart/form-data", class="container")
   | {% csrf_token %}
   {% if user.perfil.avatar %}
-  img(src="{{ user.perfil.avatar.url }}", alt="", class="form-avatar u-full-width")
+  img(src="{{ user.perfil.avatar.url }}", alt="", class="avatar")
   {% else %}
-  img(src="/static/images/default_avatar.png", alt="", class="twelve u-full-width")
+  img(src="/static/images/default_avatar.png", alt="", class="avatar")
   {% endif %}
   div.row
     div.twelve.columns

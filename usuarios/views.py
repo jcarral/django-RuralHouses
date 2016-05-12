@@ -47,7 +47,6 @@ def user_login(request):
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
-
             return HttpResponseRedirect('/')
         else:
             messages.error(request, 'El usuario que intentas introducir no existe o la contrasenia no es correcta')

@@ -17,11 +17,11 @@
 {% if messages %}
 {% for message in messages %}
 {% if message.tags == "error" %}
-div(class="alert-{{message.tags}}") {{message}}
+div(class="alert-{{message.tags}} container") {{message}}
   i.fa.fa-minus-circle
 {% else %}
 {{messages.tags}}
-div(class="alert-{{message.tags}}") {{message}}
+div(class="alert-{{message.tags}} container") {{message}}
   i.fa.fa-check-circle-o
 {% endif %}
 {% endfor %}
@@ -30,50 +30,50 @@ form(action="", method="POST", enctype="multipart/form-data", class="container")
   | {% csrf_token %}
   div.row
     div.twelve.columns
-      label(for="{{nueva_form.nombre.id_for_label}}") Nombre
-      {{nueva_form.nombre}}
+      label(for="{{form.nombre.id_for_label}}") Nombre
+      {{form.nombre}}
 
   div.row
     div.four.columns
-      label(for="{{nueva_form.direccion.id_for_label}}") Direccion
-      {{nueva_form.direccion}}
+      label(for="{{form.direccion.id_for_label}}") Direccion
+      {{form.direccion}}
     div.four.columns
-      label(for="{{nueva_form.ciudad.id_for_label}}") Ciudad
-      {{nueva_form.ciudad}}
+      label(for="{{form.ciudad.id_for_label}}") Ciudad
+      {{form.ciudad}}
     div.four.columns
-      label(for="{{nueva_form.postcode.id_for_label}}") CP
-      {{nueva_form.postcode}}
+      label(for="{{form.postcode.id_for_label}}") CP
+      {{form.postcode}}
   div.row  
     div.four.columns
-      label(for="{{nueva_form.numeroHabitaciones.id_for_label}}") Habitaciones
-      {{nueva_form.numeroHabitaciones}}
+      label(for="{{form.numeroHabitaciones.id_for_label}}") Habitaciones
+      {{form.numeroHabitaciones}}
     div.four.columns
-      label(for="{{nueva_form.numeroBanios.id_for_label}}") Baños
-      {{nueva_form.numeroBanios}}
+      label(for="{{form.numeroBanios.id_for_label}}") Baños
+      {{form.numeroBanios}}
     div.four.columns
-      {{nueva_form.imagen}}
-      label(for="{{nueva_form.imagen.id_for_label}}") 
+      {{form.imagen}}
+      label(for="{{form.imagen.id_for_label}}") 
         i.fa.fa-upload   Subir Imagen
   div.check-icons
     div.roundedcheck
-      {{nueva_form.publico}}
-      label(for="{{nueva_form.publico.id_for_label}}" class="eye")
+      {{form.publico}}
+      label(for="{{form.publico.id_for_label}}" class="eye")
     div.roundedcheck
-      {{nueva_form.wifi}}
-      label(for="{{nueva_form.wifi.id_for_label}}", class="wifi")
+      {{form.wifi}}
+      label(for="{{form.wifi.id_for_label}}", class="wifi")
     div.roundedcheck
-      {{nueva_form.parking}}
-      label(for="{{nueva_form.parking.id_for_label}}" class="parking")
+      {{form.parking}}
+      label(for="{{form.parking.id_for_label}}" class="parking")
     div.roundedcheck
-      {{nueva_form.piscina}}
-      label(for="{{nueva_form.piscina.id_for_label}}" class="pool")
+      {{form.piscina}}
+      label(for="{{form.piscina.id_for_label}}" class="pool")
     div.roundedcheck
-      {{nueva_form.mascotas}}
-      label(for="{{nueva_form.mascotas.id_for_label}}" class="pet")
+      {{form.mascotas}}
+      label(for="{{form.mascotas.id_for_label}}" class="pet")
   div.row
     div.twelve.columns
-      label(for="{{nueva_form.descripcion.id_for_label}}") Descripcion
-      {{nueva_form.descripcion}}
+      label(for="{{form.descripcion.id_for_label}}") Descripcion
+      {{form.descripcion}}
   div.row
     button(type="submit" class="button-primary twelve columns") Confirmar registro
 {% endblock %}

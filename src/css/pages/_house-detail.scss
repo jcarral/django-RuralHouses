@@ -1,0 +1,102 @@
+.favorito-selected{
+  i{
+    color: #ff46ed;
+  }
+}
+
+.offer{
+  padding: 1em;
+  cursor: move;
+  width: 200px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  &-box{
+    @include flexbox($dir: column, $align: center);
+    input{
+      margin: 5px 0;
+      width: 100%;
+    }
+  }
+  &-btn{
+    width: 100%;
+    background-color: $green;
+    border-radius: 0;
+    margin-top: 5px;
+  }
+
+i.fa.fa-times{
+  float:right;
+  cursor:pointer;
+}
+&-item{
+  background-color: $clouds;
+  position: relative;
+  padding: 0.5em 0 0.5em 1.5em;
+  margin: 2px 1em;
+  border: 1px solid darken($clouds, 10%);
+  transition: 1s ease all;
+  &::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1em;
+    background-color: #4ECDC4;
+  }
+  &:hover{
+    background-color: darken($clouds, 15%);
+  }
+}
+}
+
+.casa{
+  position: relative;
+  &-container{
+    overflow: hidden;
+    margin-bottom: 1em;
+  }
+  &-ofertas{
+    width: 100%;
+    background-color: $cWhite;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    padding-bottom: 1em;
+
+  }
+  &-info{
+    @include flexbox($dir:column, $align:center);
+    margin-bottom: 1em;
+    overflow: hidden;
+  }
+  &-titulo{
+    width: 100%;
+    padding: 0.5em;
+    box-sizing: border-box;
+    background-color: darken(#4ECDC4, 10%);
+    margin-bottom: 1em;
+  }
+  &-image-container{
+    max-height: 300px;
+    overflow: hidden;
+  }
+}
+
+.bx-wrapper{
+  max-height: 300px;
+  padding: 0 1em;
+}
+
+.btn-fav{
+  border-radius: 100%;
+  border: 3px solid black;
+  box-sizing: border-box;
+  padding: 0.5em;
+  .fa.fa-heart{
+    font-size: 2em;
+  }
+  &:hover{
+    border-color: darken($cGoogle, 30%);
+  }
+}
