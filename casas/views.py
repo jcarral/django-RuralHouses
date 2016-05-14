@@ -25,8 +25,12 @@ class CasasList(PaginationMixin, ListView):
     #Filtra las todas las casas segun los parametros que recibe con el GET
     def get_queryset(self):
             result = super(CasasList, self).get_queryset()
+            userId = self.request.GET.get('id')
             name = self.request.GET.get('name')
             city = self.request.GET.get('city')
+            if userId is not None:
+                currentUser = User.objects.all().filter(id=userId).first()
+                return result.filter(owner= userId)
             if name is not None and city is not None:
                 query = result.filter(nombre__icontains=name, ciudad__icontains=city)
             elif name is not None:

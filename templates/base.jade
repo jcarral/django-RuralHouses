@@ -24,6 +24,7 @@ html
           a(href="/", class="menu-btn") Inicio
           | {% if user.is_authenticated %}
           a(href="{% url 'casas:nuevacasa' %}", class="menu-btn") Añadir casa
+          a(href="{% url 'casas:lista' %}?id={{user.id}}", class="menu-btn") Mis casas
           a(href="{% url 'usuarios:fichaUsuario' pk=user.perfil.pk %}", class="menu-btn") Mi perfil
           a(href="/logout", class="menu-btn") Salir
           {% else %}
@@ -32,7 +33,7 @@ html
           | {% endif %}
       div.banner
         div.banner-opacity
-        h2.banner-title {% block section_title %}{% endblock %}
+        h2.banner-title.container {% block section_title %}{% endblock %}
     | {% block content %}
     | {% endblock %}
     footer.footer
