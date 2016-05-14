@@ -28,6 +28,8 @@ class Casa(models.Model):
 
     class Meta:
         ordering = ('id', )
+    def get_absolute_url(self):
+        return '/nueva'
 
 class Oferta(models.Model):
     fechaInicio = models.DateField()
@@ -37,7 +39,7 @@ class Oferta(models.Model):
     casaOfertada = models.ForeignKey(Casa)
 
     def __str__(self):
-        return self.nombre
+        return self.casaOfertada.nombre
     class Meta:
         ordering = ('id', 'precio', )
 

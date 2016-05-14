@@ -6,11 +6,14 @@
 @import 'mixins.scss';
 @import 'footer.scss';
 @import "navbar.scss";
-@import 'list_casas.scss';
+@import 'pages/list_casas';
 @import 'login.scss';
 @import 'form.scss';
 @import 'perfil-usuario';
 @import 'pages/index';
+@import 'assets/slide';
+@import 'pages/house-detail';
+
 
 body{
   width: 100%;
@@ -18,7 +21,7 @@ body{
   max-width: 100vw;
   @include flexbox($dir: column, $justify: space-between, $align: center);
   box-sizing: border-box;
-  font-family: 'Lato';
+  font-family: 'Roboto', 'Lato';
   background-color: $cBody;
 }
 
@@ -47,4 +50,14 @@ a{
     @include alert($color: $emerald, $width: 100%);
     margin-bottom: 20px;
   }
+}
+
+.hidden{
+  visibility: hidden;;
+}
+
+.box{
+  background-color: white;
+  box-shadow: 0px 2px 14px -6px rgba(0,0,0,0.5);
+
 }

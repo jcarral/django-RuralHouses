@@ -1,22 +1,24 @@
 from django.shortcuts import render, get_object_or_404
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic import ListView, UpdateView
+from django.views.generic import ListView, UpdateView, CreateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from pure_pagination.mixins import PaginationMixin
 import time
 import json
+import datetime
 
 from .forms import CasaForm
-from .models import Casa, Favorito
+from .models import Casa, Favorito, Oferta
 from usuarios.models import Perfil
 
 #Vista para mostrar la lista de todas las casas
-class CasasList(ListView):
+class CasasList(PaginationMixin, ListView):
     model = Casa
     paginate_by = 5
     context_object_name = 'casas'
@@ -33,27 +35,31 @@ class CasasList(ListView):
                 query = result.filter(ciudad__icontains=city)
             else:
                 query = result
-            return query
+            return query.order_by('-id')
 
 class CasaDetail(DetailView):
     model = Casa
-
+    context_object_name = 'casa'
+    def get_context_data(self, **kwargs):
+        context = super(CasaDetail, self).get_context_data(**kwargs)
+        context['ofertas'] = Oferta.objects.all().filter(casaOfertada=context['casa'])
+        if self.request.user.is_authenticated():
+            context["fav"] = len(Favorito.objects.all().filter(usuarioFavorito=self.request.user, casaFavorito=context['casa']))
+        return context
 
 #Vista para aniadir una casa nueva
-@login_required(login_url='/login')
-def nueva_casa(request):
-    if request.method == 'POST':
-        nueva_form = CasaForm(data=request.POST)
-        if nueva_form.is_valid():
-            casa = nueva_form.save(commit = False)
-            casa.owner = request.user
-            casa.save()
-            return HttpResponseRedirect('/')
-        else:
-            messages.error(request, "Error")
-    else:
-        nueva_form = CasaForm()
-    return render(request, 'casas/casa_nueva.jade', {'nueva_form': nueva_form,})
+
+class NuevaCasa(LoginRequiredMixin, CreateView):
+    model = Casa
+    login_url = '/login/'
+    form_class = CasaForm
+    redirect_field_name = 'redirect_to'
+    def form_valid(self, form):
+        form.instance.owner =self.request.user
+        form.save()
+        messages.success(self.request, 'Casa creada correctamente')
+        return super(NuevaCasa, self).form_valid(form)
+
 
 def index(request):
 
@@ -77,7 +83,7 @@ def gestionar_favoritos(request):
             fav.save()
             response_data = {
             }
-            response_data['text'] = 'Oferta creada correctamente'
+            response_data['text'] = 'Fav creado correctamente'
             response_data['date'] = time.strftime("%H:%M:%S")
             return HttpResponse(
                 json.dumps(response_data),
@@ -94,3 +100,37 @@ def gestionar_favoritos(request):
             json.dumps({"nothing to see": "this isn't happening"}),
             content_type="application/json"
         )
+
+def crear_oferta(request):
+
+    if request.method == 'POST':
+        print(request.POST)
+        author = request.user
+        casaID = request.POST.get('id')
+        fechaInicio = request.POST.get('first')
+        fechaFin = request.POST.get('last')
+        precio = request.POST.get('precio')
+        casa = Casa.objects.all().filter(id=casaID, owner=author).first()
+        if casa is not None and fechaFin is not None and fechaInicio is not None:
+            oferta = Oferta(fechaInicio=fechaInicio, fechaFin=fechaFin, precio=precio, casaOfertada=casa)
+            oferta.save()
+            response_data = {
+            }
+            response_data['text'] = 'Oferta creada correctamente'
+            response_data['date'] = time.strftime("%H:%M:%S")
+            print("Funciona")
+            return HttpResponse(
+                json.dumps(response_data),
+                content_type="application/json"
+            )
+        else:
+
+            return HttpResponse(
+                json.dumps({'Error:': 'Los campos no son validos'}),
+                content_type="application/json"
+            )
+    print("Error 2")
+    return HttpResponse(
+        json.dumps({'Error': 'No es del tipo POST'}),
+        content_type="application/json"
+    )
