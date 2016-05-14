@@ -20,18 +20,22 @@
 
 div.container.casa
   section.casa-container.box
-    h3.casa-titulo Imagenes 
-    | {%if casa.imagen %}
-    ul.bxslider.casa-image-container
+    h3.casa-titulo Imagenes
+    ul.bxslider.casa-image-container 
+      | {%if casa.imagen %}
       li 
         img(src="{{casa.imagen.url}}", alt="")
       li
         img(src="{{casa.imagen.url}}", alt="")
-    {% else %}
-    img(src="/static/images/casa_generica.png", alt="", class="twelve.columns")
-    | {% endif %}
+      {% else %}
+      li 
+        img(src="/static/images/casa_generica.png", alt="")
+      li
+        img(src="/static/images/casa_generica.png", alt="")
+      | {% endif %}
   section.casa-info.box
     h3.casa-titulo Información de la casa
+    p {{casa.descripcion }}
     {% if user.is_authenticated %}
     form(action="/fav/", method="POST")
       {% csrf_token %}

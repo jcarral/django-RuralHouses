@@ -6,7 +6,7 @@
 @import 'mixins.scss';
 @import 'footer.scss';
 @import "navbar.scss";
-@import 'list_casas.scss';
+@import 'pages/list_casas';
 @import 'login.scss';
 @import 'form.scss';
 @import 'perfil-usuario';
@@ -21,7 +21,7 @@ body{
   max-width: 100vw;
   @include flexbox($dir: column, $justify: space-between, $align: center);
   box-sizing: border-box;
-  font-family: 'Lato';
+  font-family: 'Roboto', 'Lato';
   background-color: $cBody;
 }
 

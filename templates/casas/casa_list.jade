@@ -18,33 +18,46 @@
 
 {% block content %}
 
-ul.casas-list-container
+ul.casas-list-container.container
   | {% if casas %}
   | {% for rh in casas %}
-  li.casas-list-item
+  li.casas-list-item.box.row
     | {%if rh.imagen %}
-    img(src="{{rh.imagen.url}}", alt="")
+    img(src="{{rh.imagen.url}}", alt="", class="three columns casas-list-item-pic")
     | {% else %}
-    img(src="/static/images/casa_generica.png", alt="")
+    img(src="/static/images/casa_generica.png", alt="", class="three columns casas-list-item-pic")
     | {% endif %}
-    div.casas-list-item-info
-      a(href="") {{ rh.nombre }}
-      p {{ rh.descripcion|truncatechars:140}}
-      div.casas-list-item-details
-        p {{rh.fecha}}
-      a(href="{% url 'casas:detail' pk=rh.pk %}") Ver más
+    div.casas-list-item-info.nine.columns
+      div
+        h3 {{ rh.nombre }}
+        p {{ rh.descripcion|truncatechars:200}}
+      div
+        div.casas-list-item-details
+          p.fa.fa-user &nbsp;<strong>Dueño:</strong> {{rh.owner.username}}
+          p.fa.fa-clock-o &nbsp;<strong>Publicada:</strong> {{rh.fecha}}
+        div.readmore
+          a(href="{% url 'casas:detail' pk=rh.pk %}") Ver más
   | {% endfor %}
   | {% else %}
   h1 NO HAY CASAS
   {{casas}}
   | {% endif %}
-  | {% if page_obj.has_previous %}
-  a(href="{% url 'casas:lista' %}/?page={{ page_obj.previous_page_number }}") previous
-  |{% endif %}
-  span.page-current
-  | Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-  | {% if page_obj.has_next %}
-  a(href="{% url 'casas:lista' %}/?page={{ page_obj.next_page_number }}") next
-  | {% endif %}
-
+  div.pagination
+    {% if page_obj.has_previous %}
+    a(href="{% url 'casas:lista' %}?{{page_obj.previous_page_number.querystring}}", class="prev") &lsaquo;&lsaquo;
+    {% else %}
+    span.disabled.prev &lsaquo;&lsaquo;
+    {% endif %}
+    {% for page in page_obj.pages %}
+    {% ifequal page page_obj.number %}
+    span.current.pagination-item {{page}}
+    {% else %}
+    a(href="{% url 'casas:lista' %}?{{page.querystring}}", class="pagination-item"){{page}}
+    {% endifequal %}
+    {% endfor  %}
+    {% if page_obj.has_next %}
+    a(href="{% url 'casas:lista' %}?{{page_obj.next_page_number.querystring}}", class="next") &rsaquo;&rsaquo;
+    {% else %}
+    span.disabled.next &rsaquo;&rsaquo;
+    {% endif %}
 {% endblock%}

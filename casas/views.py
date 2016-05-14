@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from pure_pagination.mixins import PaginationMixin
 import time
 import json
 import datetime
@@ -17,7 +18,7 @@ from .models import Casa, Favorito, Oferta
 from usuarios.models import Perfil
 
 #Vista para mostrar la lista de todas las casas
-class CasasList(ListView):
+class CasasList(PaginationMixin, ListView):
     model = Casa
     paginate_by = 5
     context_object_name = 'casas'
@@ -34,7 +35,7 @@ class CasasList(ListView):
                 query = result.filter(ciudad__icontains=city)
             else:
                 query = result
-            return query
+            return query.order_by('-id')
 
 class CasaDetail(DetailView):
     model = Casa
