@@ -20,6 +20,7 @@ $(function() {
           showOtherMonths: true,
           dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       };
+  let offerBox = $( '#offer-container' );
 
     $( "#id_nacimiento" ).datepicker(dateInfo);
     $( "#busqueda_fechaInicio" ).datepicker(dateInfo);
@@ -30,7 +31,11 @@ $(function() {
 
 
     $( '#offer-close' ).on("click", ()=>{
-      $( '#offer-container' ).fadeOut();
+      $(offerBox).fadeOut();
     });
+
+    $( '#openofferbox' ).on('click', ()=>{
+      $(offerBox).fadeIn();  
+    })
      $('.bxslider').bxSlider();
   });

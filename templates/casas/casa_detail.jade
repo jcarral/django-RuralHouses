@@ -33,11 +33,27 @@ div.container.casa
       li
         img(src="/static/images/casa_generica.png", alt="")
       | {% endif %}
-  section.casa-info.box
+  section.casa-info.box.u-full-width
     h3.casa-titulo Información de la casa
-    p {{casa.descripcion }}
+    div.row.u-full-width
+      strong.one.column.fa.fa-home &nbsp;&nbsp;Nombre:
+      p.two.columns &nbsp;&nbsp;{{casa.nombre}}
+      strong.one.column.fa.fa-map-marker &nbsp;&nbsp;Dirección:
+      p.two.columns &nbsp;&nbsp;{{casa.direccion}}
+      strong.one.column.fa.fa-phone &nbsp;&nbsp;Teléfono:
+      p.two.columns &nbsp;&nbsp;9444444444
+      strong.one.column.fa.fa-envelope &nbsp;&nbsp;CP:
+      p.one.column &nbsp;&nbsp;{{casa.postcode}}
+      
+    p.casa-info-descripcion {{casa.descripcion }}
     {% if user.is_authenticated %}
-    form(action="/fav/", method="POST")
+    div.row.u-full-width.casa-info-details
+      p(class="two columns fa {% if casa.wifi %}fa-check-square-o green{% else %} fa-ban red{%endif%}")  &nbsp;&nbsp;Wifi
+      p(class="two columns fa {% if casa.parking %}fa-check-square-o green{% else %} fa-ban red{%endif%}")  &nbsp;&nbsp;Parking
+      p(class="two columns fa {% if casa.publico %}fa-check-square-o green{% else %} fa-ban red{%endif%}")  &nbsp;&nbsp;Vistas
+      p(class="two columns fa {% if casa.mascotas %}fa-check-square-o green{% else %} fa-ban red{%endif%}")  &nbsp;&nbsp;Mascotas
+      p(class="two columns fa {% if casa.piscina %}fa-check-square-o green{% else %} fa-ban red{%endif%}")  &nbsp;&nbsp;Piscina
+    form(action="/fav/", method="POST", class="favform")
       {% csrf_token %}
       button(id="favbtn", data-idcasa="{{casa.id}}", class="{% if fav > 0 %} favorito-selected {% endif %} btn-fav")
         i.fa.fa-heart
@@ -56,6 +72,9 @@ div.container.casa
     {% endif %}
   section.casa-ofertas#offer-list
     h3.casa-titulo Ofertas 
+      {% if casa.owner.username == user.username %}
+      i.fa.fa-plus.offerbtn#openofferbox
+      {% endif %}
     {% if ofertas %}
     {% for oferta in ofertas %}
     div.offer-item.row
@@ -64,6 +83,6 @@ div.container.casa
       p.columns.four{{oferta.fechaFin}}
     {% endfor%}
     {% else %}
-    p No hay ofertas disponibles para la casa
+    p.casa-ofertas-empty No hay ofertas disponibles para la casa
     {% endif %}
 {% endblock%}

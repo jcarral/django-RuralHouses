@@ -24995,23 +24995,28 @@ require('./slide.js');
 
 $(function () {
 
-    var dateInfo = {
-        inline: true,
-        showOtherMonths: true,
-        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-    };
+  var dateInfo = {
+    inline: true,
+    showOtherMonths: true,
+    dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+  };
+  var offerBox = $('#offer-container');
 
-    $("#id_nacimiento").datepicker(dateInfo);
-    $("#busqueda_fechaInicio").datepicker(dateInfo);
-    $("#busqueda_fechaFin").datepicker(dateInfo);
-    $("#of-fechaFin").datepicker(dateInfo);
-    $("#of-fechaInicio").datepicker(dateInfo);
-    $("#offer-container").draggable();
+  $("#id_nacimiento").datepicker(dateInfo);
+  $("#busqueda_fechaInicio").datepicker(dateInfo);
+  $("#busqueda_fechaFin").datepicker(dateInfo);
+  $("#of-fechaFin").datepicker(dateInfo);
+  $("#of-fechaInicio").datepicker(dateInfo);
+  $("#offer-container").draggable();
 
-    $('#offer-close').on("click", function () {
-        $('#offer-container').fadeOut();
-    });
-    $('.bxslider').bxSlider();
+  $('#offer-close').on("click", function () {
+    $(offerBox).fadeOut();
+  });
+
+  $('#openofferbox').on('click', function () {
+    $(offerBox).fadeIn();
+  });
+  $('.bxslider').bxSlider();
 });
 
 },{"./gestion-ajax.js":3,"./navbar.js":5,"./slide.js":6,"jquery":2,"jquery-ui":1}],5:[function(require,module,exports){

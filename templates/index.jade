@@ -17,21 +17,17 @@
 {% endblock %}
 
 {% block content %}
-section.home
-  div.home-facade
-  img(src="/static/images/fondo.jpg", alt="")
-  div.home-busqueda
-    form(action="/lista", method="get", class="container")
-      div.row
-        input(type="text", placeholder="Buscar casa", class="form-input five columns", name="name")
-        input(type="text", placeholder="Ciudad", class="form-input four columns", name="city")
-        button(type="submit", class="button-primary three columns") Buscar casa
-    form(action="", method="post", class="container")
+section.home.container
+  div.home-busqueda.row
+    form(action="/lista", method="get", class="columns four")
+      input(type="text", placeholder="Buscar casa", class="form-input", name="name")
+      input(type="text", placeholder="Ciudad", class="form-input", name="city")
+      button(type="submit", class="button-primary") Buscar casa
+    form(action="", method="post", class="columns four")
       | {% csrf_token %}
-      div.row
-        input(type="text", placeholder="Ciudad", class="form-input four columns")
-        input(type="text", placeholder="Fecha inicio", class="form-input two columns", id="busqueda_fechaInicio")
-        input(type="text", placeholder="Fecha fin", class="form-input two columns", id="busqueda_fechaFin")
-        button(type="submit", class="button-primary four columns") Buscar oferta
+      input(type="text", placeholder="Ciudad", class="form-input")
+      input(type="text", placeholder="Fecha inicio", class="form-input", id="busqueda_fechaInicio")
+      input(type="text", placeholder="Fecha fin", class="form-input", id="busqueda_fechaFin")
+      button(type="submit", class="button-primary") Buscar oferta
   
 {% endblock%}
