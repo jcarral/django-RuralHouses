@@ -46,7 +46,7 @@ section.perfil-list.container
     |{% for fav in favoritos %}
     li
       i.fa.fa-heart.fav
-      &nbsp;&nbsp;{{perfil.user.username}} ha añadido como favorito la casa {{fav.casaFavorito.nombre}}
+      &nbsp;&nbsp;{{perfil.user.username}} ha añadido como favorito la casa <a href="{% url 'casas:detail' pk=fav.casaFavorito.id %}">{{fav.casaFavorito.nombre}}</a>
     |{%endfor%}
   {% else %}
   p {{perfil.user.username}} no tiene casas favoritas
