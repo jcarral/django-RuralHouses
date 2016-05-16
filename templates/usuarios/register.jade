@@ -24,7 +24,7 @@ div(class="alert-{{message.tags}}") {{message}}
 {% endif %}
 {% endfor %}
 {% endif %}
-form(action="", method="POST", enctype="multipart/form-data", class="container u-full-width")
+form(action="", method="POST", enctype="multipart/form-data", class="container u-full-width", id="registerform")
   | {% csrf_token %}
   div.row
     div.six.columns
@@ -39,7 +39,7 @@ form(action="", method="POST", enctype="multipart/form-data", class="container u
       {{user_form.password}}
     div.six.columns
       label(for="{{user_form.password.id_for_label}}") Repite contraseña
-      {{user_form.password}}
+      input(type="password", id="txtConfirmPassword", class="form-input")
   div.row
     div.six.columns
       label(for="{{perfil_form.nombre.id_for_label}}") Nombre

@@ -11,16 +11,16 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password')
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': 'form-input'})
-        self.fields['email'].widget.attrs.update({'class': 'form-input'})
-        self.fields['password'].widget.attrs.update({'class': 'form-input'})
+        self.fields['username'].widget.attrs.update({'class': 'form-input', 'id': 'username'})
+        self.fields['email'].widget.attrs.update({'class': 'form-input', 'id': 'email'})
+        self.fields['password'].widget.attrs.update({'class': 'form-input', 'id': 'txtNewPassword'})
 class PerfilForm(forms.ModelForm):
     class Meta:
         model = Perfil
         fields = ('nombre', 'apellido', 'telefono', 'genero', 'nacimiento', 'avatar', 'website', 'twitterAccount', 'facebookAccount')
     def __init__(self, *args, **kwargs):
         super(PerfilForm, self).__init__(*args, **kwargs)
-        self.fields['nombre'].widget.attrs.update({'class': 'form-input'})
+        self.fields['nombre'].widget.attrs.update({'class': 'form-input', 'id': 'firstname'})
         self.fields['apellido'].widget.attrs.update({'class': 'form-input'})
         self.fields['telefono'].widget.attrs.update({'class': 'form-input'})
         self.fields['nacimiento'].widget.attrs.update({'class': 'form-input'})

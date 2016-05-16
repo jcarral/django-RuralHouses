@@ -8,10 +8,11 @@ var jQuery = $;
 require('./slide.js');
 import navbar from './navbar.js';
 import gestion_ajax from './gestion-ajax.js';
-
+import registro from './registro.js';
 
 navbar();
 gestion_ajax();
+registro();
 
 $(function() {
 
@@ -35,7 +36,7 @@ $(function() {
     });
 
     $( '#openofferbox' ).on('click', ()=>{
-      $(offerBox).fadeIn();  
+      $(offerBox).fadeIn();
     })
      $('.bxslider').bxSlider();
   });

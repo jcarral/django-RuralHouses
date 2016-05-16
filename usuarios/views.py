@@ -77,6 +77,8 @@ def registrar_usuario(request):
             perfil.user = user
             perfil.save()
 
+            user = authenticate(username=user_form.cleaned_data['username'], password=user_form.cleaned_data['password'])
+            login(request, user)
             registrado = True
             return HttpResponseRedirect('/')
         else:

@@ -24978,6 +24978,10 @@ var _gestionAjax = require('./gestion-ajax.js');
 
 var _gestionAjax2 = _interopRequireDefault(_gestionAjax);
 
+var _registro = require('./registro.js');
+
+var _registro2 = _interopRequireDefault(_registro);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // load jquery
@@ -24992,6 +24996,7 @@ require('./slide.js');
 
 (0, _navbar2.default)();
 (0, _gestionAjax2.default)();
+(0, _registro2.default)();
 
 $(function () {
 
@@ -25019,7 +25024,7 @@ $(function () {
   $('.bxslider').bxSlider();
 });
 
-},{"./gestion-ajax.js":3,"./navbar.js":5,"./slide.js":6,"jquery":2,"jquery-ui":1}],5:[function(require,module,exports){
+},{"./gestion-ajax.js":3,"./navbar.js":5,"./registro.js":6,"./slide.js":7,"jquery":2,"jquery-ui":1}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25048,6 +25053,74 @@ function navbar() {
 };
 
 },{"jquery":2}],6:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = registro;
+var $ = require('jquery');
+
+function registro() {
+  //Global variables
+  var validPassword = false;
+  //Items cache
+  var password = $("#txtNewPassword"),
+      confirmPassword = $("#txtConfirmPassword"),
+      form = $('#registerform'),
+      username = $('#username'),
+      email = $('#email'),
+      firstname = $('#firstname');
+
+  //Styles object
+  var cssStyles = {
+    error: {
+      'border': '2px solid #e45858'
+    },
+    valid: {
+      'border': '2px solid #66bd58'
+    }
+  };
+  //Function to add new style to an item
+  var addStyle = function addStyle(item, styles) {
+    for (var st in styles) {
+      item.style[st] = styles[st];
+    }
+  };
+
+  //Function to check if the confirm password matches with the first,
+  //any case, it adds new style to the input box
+  var checkPasswordMatch = function checkPasswordMatch() {
+    var passwordVal = $(password).val();
+    var confirmPasswordVal = $(confirmPassword).val();
+
+    if (passwordVal != confirmPasswordVal) {
+      addStyle(confirmPassword[0], cssStyles.error);
+      validPassword = false;
+    } else {
+      addStyle(confirmPassword[0], cssStyles.valid);
+      validPassword = true;
+    }
+  };
+
+  //Function to check if the form is valid
+  var validForm = function validForm(e) {
+    if ($(username).val().length == 0 || $(email).val().length == 0 || $(firstname).val().length == 0 || $(password).val().length == 0 || !validPassword) {
+      e.preventDefault();
+      alert("Faltan campos por rellenar en el formulario");
+      return false;
+    }
+    return true;
+  };
+
+  $(confirmPassword).keyup(checkPasswordMatch);
+
+  $(form).submit(function (event) {
+    validForm(event);
+  });
+};
+
+},{"jquery":2}],7:[function(require,module,exports){
 'use strict';
 
 /**
