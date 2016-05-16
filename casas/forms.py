@@ -15,7 +15,7 @@ class CasaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CasaForm, self).__init__(*args, **kwargs)
         self.fields['nombre'].widget.attrs.update({'class': 'form-input'})
-        self.fields['ciudad'].widget.attrs.update({'class': 'form-input'})
+        self.fields['ciudad'].widget.attrs.update({'class': 'form-input city-input'})
         self.fields['direccion'].widget.attrs.update({'class': 'form-input'})
         self.fields['postcode'].widget.attrs.update({'class': 'form-input'})
         self.fields['numeroBanios'].widget.attrs.update({'class': 'form-input'})

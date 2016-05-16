@@ -9,6 +9,7 @@ require('./slide.js');
 import navbar from './navbar.js';
 import gestion_ajax from './gestion-ajax.js';
 import registro from './registro.js';
+import TeleportAutocomplete from './autocomplete.js';
 
 navbar();
 gestion_ajax();
@@ -39,4 +40,10 @@ $(function() {
       $(offerBox).fadeIn();
     })
      $('.bxslider').bxSlider();
+
+     var $results = document.querySelector('.results');
+      var appendToResult = $results.insertAdjacentHTML.bind($results, 'afterend');
+      TeleportAutocomplete.init('.city-input').on('change', function(value) {
+        appendToResult('<pre class="hidden">' + JSON.stringify(value, null, 2) + '</pre>');
+      });
   });

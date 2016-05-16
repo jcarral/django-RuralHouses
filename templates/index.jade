@@ -18,16 +18,29 @@
 
 {% block content %}
 section.home.container
-  div.home-busqueda.row
-    form(action="/lista", method="get", class="columns four")
-      input(type="text", placeholder="Buscar casa", class="form-input", name="name")
-      input(type="text", placeholder="Ciudad", class="form-input", name="city")
+  form(action="/lista", method="get", class="finder box u-full-width row")
+    div.four.columns
+      h4.finder-title Ubicación
+      div.finder-box
+        input(type="text", placeholder="Nombre casa", class="form-input", name="name")
+        i.fa.fa-home
+      div.finder-box
+        input(type="text", placeholder="Ciudad", class="form-input city-input", name="city")
+        i.fa.fa-building
+    div.three.columns
+      h4.finder-title Fechas
+      div.finder-box
+        input(type="text", placeholder="Fecha inicio", class="form-input", id="busqueda_fechaInicio")
+        i.fa.fa-calendar
+      div.finder-box
+        input(type="text", placeholder="Fecha fin", class="form-input", id="busqueda_fechaFin")
+        i.fa.fa-calendar
+    div.three.columns
+      h3.finder-title Precio
+      input(type="range", style="width: 100%")
+    div.two.columns
+      h4.finder-title Confirmar
       button(type="submit", class="button-primary") Buscar casa
-    form(action="", method="post", class="columns four")
-      | {% csrf_token %}
-      input(type="text", placeholder="Ciudad", class="form-input")
-      input(type="text", placeholder="Fecha inicio", class="form-input", id="busqueda_fechaInicio")
-      input(type="text", placeholder="Fecha fin", class="form-input", id="busqueda_fechaFin")
-      button(type="submit", class="button-primary") Buscar oferta
-  
+      
+div.results
 {% endblock%}

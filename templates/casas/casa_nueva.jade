@@ -39,7 +39,8 @@ form(action="", method="POST", enctype="multipart/form-data", class="container")
       {{form.direccion}}
     div.four.columns
       label(for="{{form.ciudad.id_for_label}}") Ciudad
-      {{form.ciudad}}
+      div.relative-box
+        {{form.ciudad}}
     div.four.columns
       label(for="{{form.postcode.id_for_label}}") CP
       {{form.postcode}}
@@ -76,4 +77,5 @@ form(action="", method="POST", enctype="multipart/form-data", class="container")
       {{form.descripcion}}
   div.row
     button(type="submit" class="button-primary twelve columns") Confirmar registro
+div.results
 {% endblock %}

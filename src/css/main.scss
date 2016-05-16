@@ -53,7 +53,8 @@ a{
 }
 
 .hidden{
-  visibility: hidden;;
+  visibility: hidden;
+  display: none;
 }
 
 .box{
@@ -72,4 +73,8 @@ strong{
 
 .red{
   color: $cGoogle;
+}
+
+.relative-box{
+  position: relative;
 }

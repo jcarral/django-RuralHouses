@@ -52,6 +52,7 @@ export default function registro() {
     return true;
   };
 
+  //Event handlers
   $(confirmPassword).keyup(checkPasswordMatch);
 
   $(form).submit((event) => {

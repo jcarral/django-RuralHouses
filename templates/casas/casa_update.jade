@@ -1,0 +1,35 @@
+{% extends "base.jade" %}
+
+{% block page_title %}
+| Editar Casa
+{% endblock %}
+
+{% block section_title %}
+{% if title %}
+{{ title }}
+{%else%}
+| Editar casa
+{% endif%}
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == "error" %}
+div(class="alert-{{message.tags}} container") {{message}}
+  i.fa.fa-minus-circle
+{% else %}
+{{messages.tags}}
+div(class="alert-{{message.tags}} container") {{message}}
+  i.fa.fa-check-circle-o
+{% endif %}
+{% endfor %}
+{% endif %}
+
+form(action="", method="POST", enctype="multipart/form-data", class="container")
+  | {% csrf_token %}
+  {{ form }}
+  {{casa.nombre }}
+
+{% endblock %}

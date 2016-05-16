@@ -17,6 +17,18 @@ from .forms import CasaForm
 from .models import Casa, Favorito, Oferta
 from usuarios.models import Perfil
 
+class CasaUpdate(PaginationMixin, ListView):
+    model = Casa
+    login_url = '/login/'
+    form_class = CasaForm
+    redirect_field_name = 'redirect_to'
+    context_object_name = 'casa'
+    def get_queryset(self):
+        base_qs = super(CasaUpdate, self).get_queryset()
+        base_qs = Casa.objects.all().filter(owner=self.request.user, id=self.kwargs['pk'])
+        print(base_qs)
+        return base_qs
+
 #Vista para mostrar la lista de todas las casas
 class CasasList(PaginationMixin, ListView):
     model = Casa
