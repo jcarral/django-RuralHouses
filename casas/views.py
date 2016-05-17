@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from pure_pagination.mixins import PaginationMixin
+
 import time
 import json
 import datetime
@@ -86,7 +87,15 @@ def index(request):
         except:
             perfil = Perfil(user=request.user)
             perfil.save()
-    return render(request, 'index.jade', {})
+        finally:
+            ultimas = Casa.objects.all().order_by('-id')[:3]
+            context = {
+                'casas': ultimas,
+                'favs1': len(Favorito.objects.all().filter(casaFavorito=ultimas[0])),
+                'favs2': len(Favorito.objects.all().filter(casaFavorito=ultimas[1])),
+                'favs3': len(Favorito.objects.all().filter(casaFavorito=ultimas[2])),
+            }
+    return render(request, 'index.jade', context)
 
 def gestionar_favoritos(request):
     if request.method == 'POST':

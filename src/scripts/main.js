@@ -39,7 +39,16 @@ $(function() {
     $( '#openofferbox' ).on('click', ()=>{
       $(offerBox).fadeIn();
     })
+
+    $( '#min-precio' ).on("change mousemove", ()=>{
+      $( '#precio-minimo' ).text($( '#min-precio' ).val());
+    });
+    $( '#max-precio' ).on("change mousemove", ()=>{
+      $( '#precio-maximo' ).text($( '#max-precio' ).val());
+    });
+
      $('.bxslider').bxSlider();
+
 
      var $results = document.querySelector('.results');
       var appendToResult = $results.insertAdjacentHTML.bind($results, 'afterend');

@@ -26632,6 +26632,14 @@ $(function () {
   $('#openofferbox').on('click', function () {
     $(offerBox).fadeIn();
   });
+
+  $('#min-precio').on("change mousemove", function () {
+    $('#precio-minimo').text($('#min-precio').val());
+  });
+  $('#max-precio').on("change mousemove", function () {
+    $('#precio-maximo').text($('#max-precio').val());
+  });
+
   $('.bxslider').bxSlider();
 
   var $results = document.querySelector('.results');

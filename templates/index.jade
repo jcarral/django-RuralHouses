@@ -17,7 +17,7 @@
 {% endblock %}
 
 {% block content %}
-section.home.container
+main.home.container
   form(action="/lista", method="get", class="finder box u-full-width row")
     div.four.columns
       h4.finder-title Ubicación
@@ -37,10 +37,59 @@ section.home.container
         i.fa.fa-calendar
     div.three.columns
       h3.finder-title Precio
-      input(type="range", style="width: 100%")
+      div.finder-precio-info
+        p Precio mínimo:
+        p.finder-precio
+          span#precio-minimo 10
+          i.fa.fa-euro
+      input(type="range", style="width: 100%", name="min-precio", id="min-precio", value="10")
+      div.finder-precio-info
+        p Precio máximo:
+        p.finder-precio
+          span#precio-maximo 90
+          i.fa.fa-euro
+      input(type="range", style="width: 100%", name="max-precio", id="max-precio", value="90")
     div.two.columns
       h4.finder-title Confirmar
       button(type="submit", class="button-primary") Buscar casa
-      
+  h3.main-title Últimas casas
+  section.main-list.u-full-width.row
+    div.one.column.previous
+      i.fa-chevron-left.fa.box
+    ul.ten.columns.row.u-full-width
+      {% for casa in casas %}
+      li.main-list-item.box.four.columns
+        picture.main-list-item-pic
+          {% if casa.imagen %}
+          img(src="{{casa.imagen.url}}", alt="")
+          {% else %}
+          img(src="./static/images/casa_generica.png", alt="")
+          {% endif %}
+          div.screen
+            a(href="{% url 'casas:detail' pk=casa.id %}") Ver Casa
+        div.main-list-item-info
+          h6.nombrecasa {{casa.nombre}}
+            i.fa.fa-home
+          p.info-sec {{casa.ciudad}}
+            i.fa.fa-building
+          p.info-sec {{casa.owner.username}}
+            i.fa.fa-user
+          //- Chapuza, hay que usar filtros, lo sé
+          {% with forloop.counter as pos %}
+          {% if pos = 1 %}
+          p.info-sec{{ favs1 }}
+            i.fa.fa-heart.fav
+          {% elif pos = 2 %}
+          p.info-sec{{favs2 }}
+            i.fa.fa-heart.fav
+          {% else %}
+          p.info-sec{{favs3}}
+            i.fa.fa-heart.fav
+          {% endif %}
+          {% endwith %}
+            
+        {% endfor %}
+    div.one.column.next
+      i.fa-chevron-right.fa.box
 div.results
 {% endblock%}
