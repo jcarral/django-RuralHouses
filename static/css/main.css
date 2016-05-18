@@ -1379,6 +1379,8 @@ input[type=checkbox]:checked + label:before {
     position: absolute;
     bottom: 20px;
     left: 20px; }
+    .perfil-info-user i {
+      font-weight: bold; }
   .perfil-info-details {
     display: -webkit-box;
     display: -webkit-flex;
@@ -1411,9 +1413,34 @@ input[type=checkbox]:checked + label:before {
         -webkit-transform: perspective(400) translate3d(0, 0, -120px);
                 transform: perspective(400) translate3d(0, 0, -120px);
         color: black; }
-      .perfil-info-details .editbtn--fulname h4 {
-        display: inline-block;
-        width: auto; }
+    .perfil-info-details--fullname h4 {
+      font-size: 2em;
+      display: inline;
+      width: auto;
+      margin-right: 10px; }
+    .perfil-info-details--fullname i {
+      float: left;
+      margin-right: 10px; }
+    .perfil-info-details--contact {
+      margin-top: 30px; }
+      .perfil-info-details--contact div {
+        display: inline-block; }
+      .perfil-info-details--contact h6 {
+        font-size: 1em;
+        margin: 10px;
+        display: inline; }
+      .perfil-info-details--contact i {
+        float: left; }
+    .perfil-info-details--secondary {
+      margin-top: 30px; }
+      .perfil-info-details--secondary div {
+        display: inline-block; }
+      .perfil-info-details--secondary h6 {
+        font-size: 1.25em;
+        display: inline;
+        margin: 10px; }
+      .perfil-info-details--secondary i {
+        float: left; }
 
 .perfil-list > ul > li {
   padding: 10px; }
@@ -1716,7 +1743,7 @@ input[type=checkbox]:checked + label:before {
     font-weight: bold;
     line-height: 100%; }
 
-.previous, .next {
+.more {
   width: 100%;
   height: 100%;
   display: -webkit-box;
@@ -1739,7 +1766,7 @@ input[type=checkbox]:checked + label:before {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center; }
-  .previous i, .next i {
+  .more i {
     border: 1px solid #d4d4d4;
     background-color: rgba(0, 0, 0, 0.09);
     border-radius: 100%;
@@ -1749,7 +1776,6 @@ input[type=checkbox]:checked + label:before {
 
 .nombrecasa {
   width: 100%;
-  text-align: center;
   margin: 10px 0;
   font-size: 1.5em; }
   .nombrecasa i {
@@ -2239,6 +2265,15 @@ strong {
 .red {
   color: #dd4b39; }
 
+.male {
+  color: #00d1ff; }
+
+.female {
+  color: #ff00e6; }
+
+.trans {
+  color: #26e71d; }
+
 .twitter {
   color: #55acee; }
 
@@ -2247,3 +2282,11 @@ strong {
 
 .relative-box {
   position: relative; }
+
+*::-moz-selection {
+  background: #ffb7b7;
+  /* WebKit/Blink Browsers */ }
+
+*::selection {
+  background: #ffb7b7;
+  /* WebKit/Blink Browsers */ }

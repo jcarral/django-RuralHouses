@@ -12,7 +12,7 @@
 {% if title %}
 {{ title }}
 {%else%}
-| RuralHouses blablabla
+| RuralHouses SINKING SOFT
 {% endif%}
 {% endblock %}
 
@@ -42,13 +42,13 @@ main.home.container
         p.finder-precio
           span#precio-minimo 10
           i.fa.fa-euro
-      input(type="range", style="width: 100%", name="min-precio", id="min-precio", value="10")
+      input(type="range", style="width: 100%", name="min-precio", id="min-precio", value="10", max="199")
       div.finder-precio-info
         p Precio máximo:
         p.finder-precio
-          span#precio-maximo 90
+          span#precio-maximo 180
           i.fa.fa-euro
-      input(type="range", style="width: 100%", name="max-precio", id="max-precio", value="90")
+      input(type="range", style="width: 100%", name="max-precio", id="max-precio", value="180", max="200")
     div.two.columns.finder-submit
       h4.finder-title Confirmar
       div
@@ -57,7 +57,7 @@ main.home.container
         button(type="submit", class="button-primary") Buscar casa
   h3.main-title Últimas casas
   section.main-list.u-full-width.row
-    div.one.column.previous
+    div.one.column.more
       i.fa-chevron-left.fa.box
     ul.ten.columns.row.u-full-width
       {% for casa in casas %}
@@ -71,7 +71,7 @@ main.home.container
           div.screen
             a(href="{% url 'casas:detail' pk=casa.id %}") Ver Casa
         div.main-list-item-info
-          h6.nombrecasa {{casa.nombre}}
+          h6.nombrecasa &nbsp;{{casa.nombre}}
             i.fa.fa-home
           p.info-sec {{casa.ciudad}}
             i.fa.fa-building
@@ -92,7 +92,7 @@ main.home.container
           {% endwith %}
             
         {% endfor %}
-    div.one.column.next
+    div.one.column.more
       i.fa-chevron-right.fa.box
 div.results
 {% endblock%}

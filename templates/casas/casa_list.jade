@@ -42,7 +42,7 @@ ul.casas-list-container.container
   h1 NO HAY CASAS
   {{casas}}
   | {% endif %}
-  div.pagination
+  div.pagination.u-full-width
     {% if page_obj.has_previous %}
     a(href="{% url 'casas:lista' %}?{{page_obj.previous_page_number.querystring}}", class="prev") &lsaquo;&lsaquo;
     {% else %}

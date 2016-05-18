@@ -35,6 +35,10 @@ $borderAvatarColor : darken(#05B2D2, 25%);
       position: absolute;
       bottom: 20px;
       left: 20px;
+      i{
+
+        font-weight: bold;
+      }
     }
 
     &-details{
@@ -47,11 +51,47 @@ $borderAvatarColor : darken(#05B2D2, 25%);
           transform: perspective(400) translate3d(0, 0, -120px);
           color: black;
         }
-        &--fulname{
+
+        }
+
+        &--fullname{
           h4{
-            display: inline-block;
+            font-size: 2em;
+            display: inline;
             width: auto;
+            margin-right: 10px;
           }
+          i{
+            float: left;
+            margin-right: 10px;
+          }
+      }
+      &--contact{
+        margin-top: 30px;
+        div{
+          display: inline-block;
+        }
+        h6{
+          font-size: 1em;
+          margin: 10px;
+          display: inline;
+        }
+        i{
+          float: left;
+        }
+      }
+      &--secondary{
+        margin-top: 30px;
+        div{
+          display: inline-block;
+        }
+        h6{
+          font-size: 1.25em;
+          display: inline;
+          margin: 10px;
+        }
+        i{
+          float: left;
         }
       }
     }

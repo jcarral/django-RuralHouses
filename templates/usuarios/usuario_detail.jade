@@ -23,27 +23,75 @@ section.container.perfil-info.row
     {% endif %}
     div.perfil-info-user
       p {{perfil.user.username}}
+        {% if not perfil.genero %}
+        i.fa-transgender.fa.trans
+        {% elif perfil.genero == "M" %}
+        i.fa.fa-mars.male
+        {% elif perfil.genero == "F" %}
+        i.fa.fa-venus.female
+        {% else %}
+        i.fa-transgender.fa.trans
+        {% endif %}
   div.eight.columns.perfil-info-details
     |{% if perfil == user.perfil %}
     a(href="{% url 'usuarios:editarperfil' pk=perfil.id %}", class="editbtn")
       i.fa.fa-pencil-square-o
     |{% endif %}
-    h3 {{perfil.user.username}}
     div.perfil-info-details--fullname.u-full-width
       {% if perfil.nombre %}
       h4 {{perfil.nombre}}
         i.fa.fa-user
       {% else %}
-      h4 Sin nombre
+      h4 Sin_nombre
         i.fa.fa-user
       {% endif %}
       {% if perfil.apellido %}
       h4 {{perfil.apellido}}
       {% else %}
-      h4 Sin apellido
+      h4 Sin_apellido
       {% endif %}
-      
-    
+    div.perfil-info-details--secondary.u-full-width
+      div
+        {% if perfil.telefono %}
+        h6 {{ perfil.telefono }}
+          i.fa.fa-phone
+        {% else %}
+        h6 Sin_telefono
+          i.fa.fa-phone
+        {% endif %}
+      div
+        {% if perfil.nacimiento %}
+        h6 {{ perfil.nacimiento }}
+          i.fa.fa-birthday-cake
+        {% else %}
+        h6 01/01/0000
+          i.fa.fa-birthday-cake
+        {% endif %}
+    div.perfil-info-details--contact.u-full-width
+      div
+        {% if perfil.twitterAccount %}
+        h6 {{ perfil.twitterAccount }}
+          i.fa.fa-twitter
+        {% else %}
+        h6 Sin_cuenta
+          i.fa.fa-twitter
+        {% endif %}
+      div
+        {% if perfil.facebookAccount %}
+        h6 {{ perfil.facebookAccount }}
+          i.fa.fa-facebook
+        {% else %}
+        h6 Sin_cuenta
+          i.fa.fa-facebook
+        {% endif %}
+      div
+        {% if perfil.website %}
+        h6 {{ perfil.website }}
+          i.fa.fa-safari
+        {% else %}
+        h6 Sin_web
+          i.fa.fa-safari
+        {% endif %}
 section.perfil-list.container
   h3.perfil-list-titulo Lista de casas de {{perfil.user.username}}
   {% if casas|length > 0 %}

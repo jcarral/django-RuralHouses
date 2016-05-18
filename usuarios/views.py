@@ -36,6 +36,7 @@ class UsuarioFicha(DetailView):
         context = super(UsuarioFicha, self).get_context_data(**kwargs)
         context['casas'] = Casa.objects.all().filter(owner__perfil=context['perfil'])
         context['favoritos'] = Favorito.objects.all().filter(usuarioFavorito__perfil=context['perfil'])
+        print(context['perfil'].genero)
         return context
 
 #Iniciar sesion

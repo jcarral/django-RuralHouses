@@ -74,6 +74,15 @@ strong{
 .red{
   color: $cGoogle;
 }
+.male{
+  color: rgb(0, 209, 255);
+}
+.female{
+  color: #ff00e6;
+}
+.trans{
+  color: rgb(38, 231, 29);
+}
 .twitter{
   color: $cTwitter;
 }
@@ -83,4 +92,8 @@ strong{
 }
 .relative-box{
   position: relative;
+}
+
+*::selection {
+  background: #ffb7b7; /* WebKit/Blink Browsers */
 }
