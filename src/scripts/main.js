@@ -50,18 +50,7 @@ $(function() {
      $('.bxslider').bxSlider();
 
 
-    $("#searchform").submit(function(){
-        $("input").each(function(index, obj){
-            if($(obj).val() == "") {
-                $(obj).remove();
-            }
-        });
-        if($('#use-price').is(':checked')){
-          $('#max-precio').remove();
-          $('#min-precio').remove();
-        }
-        $('#use-price').remove();
-    });
+
 
      var $results = document.querySelector('.results');
       var appendToResult = $results.insertAdjacentHTML.bind($results, 'afterend');

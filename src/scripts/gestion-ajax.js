@@ -155,4 +155,32 @@ export default function gestion_ajax() {
     });
 
   };
+
+
+  $("#searchform").submit(function(){
+    let busqueda_fechaInicio = $('#busqueda_fechaInicio');
+    let busqueda_fechaFin = $('#busqueda_fechaFin');
+
+
+    if($(busqueda_fechaInicio).val() != ""){
+      let currentVal = $(busqueda_fechaInicio).val();
+      $(busqueda_fechaInicio).val(formatDate(currentVal));
+    }
+    if($(busqueda_fechaFin).val() != ""){
+      let currentVal = $(busqueda_fechaFin).val();
+      $(busqueda_fechaFin).val(formatDate(currentVal));
+    }
+
+
+      $("input").each(function(index, obj){
+          if($(obj).val() == "") {
+              $(obj).remove();
+          }
+      });
+      if(!$('#use-price').is(':checked')){
+        $('#max-precio').remove();
+        $('#min-precio').remove();
+      }
+      $('#use-price').remove();
+  });
 }

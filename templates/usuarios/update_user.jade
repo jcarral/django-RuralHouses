@@ -28,16 +28,16 @@ div(class="alert-{{message.tags}} container") {{message}}
 
 form(action="", method="POST", enctype="multipart/form-data", class="container")
   | {% csrf_token %}
-  {% if user.perfil.avatar %}
-  img(src="{{ user.perfil.avatar.url }}", alt="", class="avatar")
-  {% else %}
-  img(src="/static/images/default_avatar.png", alt="", class="avatar")
-  {% endif %}
-  div.row
-    div.twelve.columns
-      {{form.avatar}}
-      label(for="{{form.avatar.id_for_label}}") 
-        i.fa.fa-upload   Actualizar imagen
+  
+  div.u-full-width.update-avatar
+    {% if user.perfil.avatar %}
+    img(src="{{ user.perfil.avatar.url }}", alt="", class="avatar")
+    {% else %}
+    img(src="/static/images/default_avatar.png", alt="", class="avatar")
+    {% endif %}
+    {{form.avatar}}
+    label(for="{{form.avatar.id_for_label}}") 
+      i.fa.fa-upload   Actualizar imagen
   div.row
     div.six.columns
       label(for="{{form.nombre.id_for_label}}") Nombre
@@ -60,10 +60,12 @@ form(action="", method="POST", enctype="multipart/form-data", class="container")
       label(for="{{form.website.id_for_label}}") Página web
       {{form.website}}
     div.four.columns
-      label(for="{{form.twitterAccount.id_for_label}}") Twitter
+      label(for="{{form.twitterAccount.id_for_label}}") Twitter&nbsp;
+        i.fa.fa-twitter.twitter
       {{form.twitterAccount}}
     div.four.columns
-      label(for="{{form.facebookAccount.id_for_label}}") Facebook
+      label(for="{{form.facebookAccount.id_for_label}}") Facebook&nbsp;
+        i.fa.fa-facebook.facebook
       {{form.facebookAccount}}
    div.row    
     button(type="submit", class="button-primary twelve columns") Actualizar usuario

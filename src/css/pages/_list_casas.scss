@@ -12,10 +12,10 @@
     width: 95%;
     min-height: 200px;
     margin-top: 10px;
-    padding: 5px 10px;
+    padding: 5px 30px 5px 10px;
     border: 1px solid #d4d4d4;
     @include flexbox($dir: row);
-
+    word-wrap: break-word;
     &-info{
       @include flexbox($dir: column, $justify: space-between, $align: center);
       width: 100%;

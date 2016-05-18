@@ -33,6 +33,13 @@
 
   }
 
+  &-submit{
+    div{
+      margin-top: 40px;
+      line-height: 1em;
+    }
+  }
+
   &-box{
     position: relative;
     width: 100%;
@@ -56,6 +63,8 @@
       margin: 0 0 10px 0;
     }
   }
+
+
 }
 
 .tp-ac__list{

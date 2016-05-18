@@ -49,11 +49,12 @@ main.home.container
           span#precio-maximo 90
           i.fa.fa-euro
       input(type="range", style="width: 100%", name="max-precio", id="max-precio", value="90")
-    div.two.columns
+    div.two.columns.finder-submit
       h4.finder-title Confirmar
-      input(type="checkbox", id="use-price", name="check-price", class="checkbox", checked)
-      label(for="use-price", class="checklbl") Utilizar rango de precio
-      button(type="submit", class="button-primary") Buscar casa
+      div
+        input(type="checkbox", id="use-price", name="check-price", class="checkbox", checked)
+        label(for="use-price", class="checklbl") Utilizar rango de precio
+        button(type="submit", class="button-primary") Buscar casa
   h3.main-title Últimas casas
   section.main-list.u-full-width.row
     div.one.column.previous

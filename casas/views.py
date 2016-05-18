@@ -51,21 +51,32 @@ class CasasList(PaginationMixin, ListView):
                 currentUser = User.objects.all().filter(id=userId).first()
                 return result.filter(owner= userId)
 
-            query = Oferta.objects.all()
-            if precioMin is not None:
-                query = query.exclude(precio__lt=precioMin)
-            if precioMax is not None:
-                query = query.exclude(precio__gt=precioMax)
-            if fechaIni is not None:
-                query = query.exclude(fechaInicio__lt=fechaIni)
-            if fechaFin is not None:
-                query = query.exclude(fechaFin__gt=fechaFin)
-            newquery = []
-            #for of in query:
-                #c =of.oferta.all()
-                #print(c)
-
-            return query.order_by('-id')
+            if precioMin is not None or precioMax is not None or fechaIni is not None or fechaFin is not None:
+                query = Oferta.objects.all()
+                if precioMin is not None:
+                    query = query.exclude(precio__lt=precioMin)
+                if precioMax is not None:
+                    query = query.exclude(precio__gt=precioMax)
+                if fechaIni is not None:
+                    query = query.exclude(fechaInicio__lt=fechaIni)
+                if fechaFin is not None:
+                    query = query.exclude(fechaFin__gt=fechaFin)
+                newquery = []
+                for of in query:
+                    houseID = of.casaOfertada_id
+                    current = Casa.objects.all().filter(id=houseID).first()
+                    if name is not None and name not in current.nombre:
+                        continue
+                    if city is not None and city not in current.ciudad:
+                        continue
+                    newquery.append(current)
+                    query = newquery
+            else:
+                if name is not None:
+                    query = query.filter(nombre__icontains=name)
+                if city is not None:
+                    query = query.filter(ciudad__icontains=city)
+            return query
 
 class CasaDetail(DetailView):
     model = Casa
@@ -108,6 +119,14 @@ def index(request):
                 'favs2': len(Favorito.objects.all().filter(casaFavorito=ultimas[1])),
                 'favs3': len(Favorito.objects.all().filter(casaFavorito=ultimas[2])),
             }
+    else:
+        ultimas = Casa.objects.all().order_by('?')[:3]
+        context = {
+            'casas': ultimas,
+            'favs1': len(Favorito.objects.all().filter(casaFavorito=ultimas[0])),
+            'favs2': len(Favorito.objects.all().filter(casaFavorito=ultimas[1])),
+            'favs3': len(Favorito.objects.all().filter(casaFavorito=ultimas[2])),
+        }
     return render(request, 'index.jade', context)
 
 def gestionar_favoritos(request):
@@ -189,7 +208,6 @@ def borrar_oferta(request):
             )
 
         else:
-            print(request.POST)
             return HttpResponse(
                 json.dumps({'Error:': 'Los campos no son validos'}),
                 content_type="application/json"

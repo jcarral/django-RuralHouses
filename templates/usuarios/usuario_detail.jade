@@ -14,18 +14,36 @@
 
 {% block content %}
 
-section.container.perfil-info
-  h3.perfil-info-titulo Detalles
+section.container.perfil-info.row
+  div.four.columns.perfil-inner
+    {% if perfil.avatar %}
+    img(src="{{ perfil.avatar.url }}", alt="", class="", height="200px", width="200px")
+    {% else %}
+    img(src="/static/images/default_avatar.png", alt="", class="",  height="200px", width="200px")
+    {% endif %}
+    div.perfil-info-user
+      p {{perfil.user.username}}
+  div.eight.columns.perfil-info-details
     |{% if perfil == user.perfil %}
-    a(href="{% url 'usuarios:editarperfil' pk=perfil.id %}")
+    a(href="{% url 'usuarios:editarperfil' pk=perfil.id %}", class="editbtn")
       i.fa.fa-pencil-square-o
     |{% endif %}
-  div.row.perfil-inner
-    {% if user.perfil.avatar %}
-    img(src="{{ user.perfil.avatar.url }}", alt="", class="four columns", height="200px", width="200px")
-    {% else %}
-    img(src="/static/images/default_avatar.png", alt="", class="four columns",  height="200px", width="200px")
-    {% endif %}
+    h3 {{perfil.user.username}}
+    div.perfil-info-details--fullname.u-full-width
+      {% if perfil.nombre %}
+      h4 {{perfil.nombre}}
+        i.fa.fa-user
+      {% else %}
+      h4 Sin nombre
+        i.fa.fa-user
+      {% endif %}
+      {% if perfil.apellido %}
+      h4 {{perfil.apellido}}
+      {% else %}
+      h4 Sin apellido
+      {% endif %}
+      
+    
 section.perfil-list.container
   h3.perfil-list-titulo Lista de casas de {{perfil.user.username}}
   {% if casas|length > 0 %}
