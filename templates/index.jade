@@ -18,7 +18,7 @@
 
 {% block content %}
 main.home.container
-  form(action="/lista", method="get", class="finder box u-full-width row")
+  form(action="/lista", method="get", class="finder box u-full-width row", id="searchform")
     div.four.columns
       h4.finder-title Ubicación
       div.finder-box
@@ -30,10 +30,10 @@ main.home.container
     div.three.columns
       h4.finder-title Fechas
       div.finder-box
-        input(type="text", placeholder="Fecha inicio", class="form-input", id="busqueda_fechaInicio")
+        input(type="text", placeholder="Fecha inicio", class="form-input", id="busqueda_fechaInicio", name="fIni")
         i.fa.fa-calendar
       div.finder-box
-        input(type="text", placeholder="Fecha fin", class="form-input", id="busqueda_fechaFin")
+        input(type="text", placeholder="Fecha fin", class="form-input", id="busqueda_fechaFin", name="fFin")
         i.fa.fa-calendar
     div.three.columns
       h3.finder-title Precio
@@ -51,6 +51,8 @@ main.home.container
       input(type="range", style="width: 100%", name="max-precio", id="max-precio", value="90")
     div.two.columns
       h4.finder-title Confirmar
+      input(type="checkbox", id="use-price", name="check-price", class="checkbox", checked)
+      label(for="use-price", class="checklbl") Utilizar rango de precio
       button(type="submit", class="button-primary") Buscar casa
   h3.main-title Últimas casas
   section.main-list.u-full-width.row

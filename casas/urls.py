@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^casa/(?P<pk>[0-9]+)/edit/$', views.CasaUpdate.as_view(template_name="casas/casa_update.jade"), name="casaupdate"),
     url(r'^fav/$', views.gestionar_favoritos, name='favorito'),
     url(r'^nuevaoferta/$', views.crear_oferta, name='nuevaoferta'),
+    url(r'^borraroferta/$', views.borrar_oferta, name="borrar"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

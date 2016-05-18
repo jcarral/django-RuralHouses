@@ -41,17 +41,30 @@ class CasasList(PaginationMixin, ListView):
             userId = self.request.GET.get('id')
             name = self.request.GET.get('name')
             city = self.request.GET.get('city')
+            precioMin = self.request.GET.get('min-precio')
+            precioMax = self.request.GET.get('max-precio')
+            fechaIni = self.request.GET.get('fIni')
+            fechaFin = self.request.GET.get('fFin')
+
+            query = result
             if userId is not None:
                 currentUser = User.objects.all().filter(id=userId).first()
                 return result.filter(owner= userId)
-            if name is not None and city is not None:
-                query = result.filter(nombre__icontains=name, ciudad__icontains=city)
-            elif name is not None:
-                query = result.filter(nombre__icontains=name)
-            elif city is not None:
-                query = result.filter(ciudad__icontains=city)
-            else:
-                query = result
+
+            query = Oferta.objects.all()
+            if precioMin is not None:
+                query = query.exclude(precio__lt=precioMin)
+            if precioMax is not None:
+                query = query.exclude(precio__gt=precioMax)
+            if fechaIni is not None:
+                query = query.exclude(fechaInicio__lt=fechaIni)
+            if fechaFin is not None:
+                query = query.exclude(fechaFin__gt=fechaFin)
+            newquery = []
+            #for of in query:
+                #c =of.oferta.all()
+                #print(c)
+
             return query.order_by('-id')
 
 class CasaDetail(DetailView):
@@ -88,7 +101,7 @@ def index(request):
             perfil = Perfil(user=request.user)
             perfil.save()
         finally:
-            ultimas = Casa.objects.all().order_by('-id')[:3]
+            ultimas = Casa.objects.all().order_by('?')[:3]
             context = {
                 'casas': ultimas,
                 'favs1': len(Favorito.objects.all().filter(casaFavorito=ultimas[0])),
@@ -129,7 +142,6 @@ def gestionar_favoritos(request):
 def crear_oferta(request):
 
     if request.method == 'POST':
-        print(request.POST)
         author = request.user
         casaID = request.POST.get('id')
         fechaInicio = request.POST.get('first')
@@ -159,3 +171,31 @@ def crear_oferta(request):
         json.dumps({'Error': 'No es del tipo POST'}),
         content_type="application/json"
     )
+
+def borrar_oferta(request):
+    if request.method == 'POST':
+        idOferta = request.POST.get('idOferta')
+
+        if idOferta is not None:
+            oferta = get_object_or_404(Oferta, pk=idOferta).delete()
+            response_data = {
+
+            }
+            response_data['text'] = 'Oferta borrada correctamente'
+            response_data['date'] = time.strftime("%H:%M:%S")
+            return HttpResponse(
+                json.dumps(response_data),
+                content_type="application/json"
+            )
+
+        else:
+            print(request.POST)
+            return HttpResponse(
+                json.dumps({'Error:': 'Los campos no son validos'}),
+                content_type="application/json"
+            )
+    else:
+        return HttpResponse(
+            json.dumps({'Error': 'No es del tipo POST'}),
+            content_type="application/json"
+        )

@@ -36,7 +36,7 @@ class Oferta(models.Model):
     fechaFin = models.DateField()
     fechaCreada = models.DateField(default=date.today)
     precio = models.FloatField(null=True)
-    casaOfertada = models.ForeignKey(Casa)
+    casaOfertada = models.ForeignKey(Casa, related_name='oferta')
 
     def __str__(self):
         return self.casaOfertada.nombre

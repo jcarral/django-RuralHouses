@@ -53,10 +53,10 @@ div.container.casa
       p(class="two columns fa {% if casa.publico %}fa-check-square-o green{% else %} fa-ban red{%endif%}")  &nbsp;&nbsp;Vistas
       p(class="two columns fa {% if casa.mascotas %}fa-check-square-o green{% else %} fa-ban red{%endif%}")  &nbsp;&nbsp;Mascotas
       p(class="two columns fa {% if casa.piscina %}fa-check-square-o green{% else %} fa-ban red{%endif%}")  &nbsp;&nbsp;Piscina
-    form(action="/fav/", method="POST", class="favform")
-      {% csrf_token %}
-      button(id="favbtn", data-idcasa="{{casa.id}}", class="{% if fav > 0 %} favorito-selected {% endif %} btn-fav")
-        i.fa.fa-heart
+      form(action="/fav/", method="POST", class="favform two columns")
+        {% csrf_token %}
+        button(id="favbtn", data-idcasa="{{casa.id}}", class="{% if fav > 0 %} favorito-selected {% endif %} btn-fav")
+          i.fa.fa-heart
     {% endif %}
     {% if casa.owner.username == user.username %}
     div(class="offer box", id="offer-container" )
@@ -78,9 +78,19 @@ div.container.casa
     {% if ofertas %}
     {% for oferta in ofertas %}
     div.offer-item.row
+      {% if casa.owner.username == user.username %}
+      p.columns.three{{oferta.fechaInicio}} 
+      p.columns.three{{oferta.precio}}
+      p.columns.three{{oferta.fechaFin}}
+      form(action="/borraroferta/", method="POST", class="three columns")
+        {% csrf_token %}
+        div(id="deletebtn", data-idoferta="{{oferta.id}}", class="deleteoffer")
+          i.fa.fa-trash-o
+      {% else %}
       p.columns.four{{oferta.fechaInicio}} 
       p.columns.four{{oferta.precio}}
       p.columns.four{{oferta.fechaFin}}
+      {% endif %}
     {% endfor%}
     {% else %}
     p.casa-ofertas-empty No hay ofertas disponibles para la casa

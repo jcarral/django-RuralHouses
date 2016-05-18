@@ -26484,7 +26484,9 @@ function gestion_ajax() {
   };
 
   $.ajaxSetup({
-    headers: { "X-CSRFToken": getCookie("csrftoken") }
+    headers: {
+      "X-CSRFToken": getCookie("csrftoken")
+    }
   });
 
   //EVENTOS para gestionar los formularios
@@ -26501,6 +26503,17 @@ function gestion_ajax() {
     crear_oferta();
   });
 
+  $('.deleteoffer').each(function (index, value) {
+    console.log(index + ", " + value);
+
+    $(value).on('click', function (event) {
+      event.preventDefault();
+      console.log("Borrando oferta...");
+      if (confirm("¿Estás seguro de que quieres borrar la oferta?")) {
+        borrar_oferta(value, $(value).attr('data-idoferta'));
+      }
+    });
+  });
   //Función para generar fechas en un formato que acepte el modelo
   var formatDate = function formatDate(date) {
     var d = new Date(date),
@@ -26520,6 +26533,11 @@ function gestion_ajax() {
     first = formatDate(new Date(first));
     var last = $($fechaFin).val();
     last = formatDate(new Date(last));
+    if (first > last) {
+      alert("La fecha de inicio no puede ser posterior a la de fin");
+      limpiar_campos_oferta();
+      return;
+    }
     var data = {
       'id': $('#newOffer').attr('data-idcasa'),
       'first': first,
@@ -26541,15 +26559,41 @@ function gestion_ajax() {
     });
   };
 
+  var borrar_oferta = function borrar_oferta(obj, id) {
+    var data = {
+      'idOferta': id
+    };
+    $.ajax({
+      url: '/borraroferta/',
+      type: 'POST',
+      data: data,
+      success: function success(json) {
+        console.log("Oferta eliminada");
+        oferta_eliminada(obj);
+      },
+      error: function error(xhr, errmsg, err) {
+        console.log('Error');
+        console.log(xhr);
+      }
+    });
+  };
+
+  var oferta_eliminada = function oferta_eliminada(obj) {
+    $(obj).parent().parent().fadeOut();
+  };
   var ofertaGuardada = function ofertaGuardada() {
     var insert = '<div class="offer-item row"><p class="four columns"> ' + $($fechaInicio).val() + ' </p> <p class="four columns">' + $($fechaFin).val() + ' </p><p class="four columns"> ' + $($precio).val() + '</p></div>';
 
     //Limpiado campos
+    limpiar_campos_oferta();
+
+    $(insert).appendTo('#offer-list').hide().fadeIn(2000);
+  };
+
+  var limpiar_campos_oferta = function limpiar_campos_oferta() {
     $($fechaInicio).val('');
     $($fechaFin).val('');
     $($precio).val('');
-
-    $(insert).appendTo('#offer-list').hide().fadeIn(2000);
   };
   //Función auxiliar para crear favoritos
   var crear_favorito = function crear_favorito() {
@@ -26641,6 +26685,19 @@ $(function () {
   });
 
   $('.bxslider').bxSlider();
+
+  $("#searchform").submit(function () {
+    $("input").each(function (index, obj) {
+      if ($(obj).val() == "") {
+        $(obj).remove();
+      }
+    });
+    if ($('#use-price').is(':checked')) {
+      $('#max-precio').remove();
+      $('#min-precio').remove();
+    }
+    $('#use-price').remove();
+  });
 
   var $results = document.querySelector('.results');
   var appendToResult = $results.insertAdjacentHTML.bind($results, 'afterend');

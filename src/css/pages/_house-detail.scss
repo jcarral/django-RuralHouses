@@ -33,6 +33,7 @@ i.fa.fa-times{
   cursor:pointer;
 }
 &-item{
+  @include flexbox($align: center);
   background-color: $clouds;
   position: relative;
   padding: 0.5em 0 0.5em 1.5em;
@@ -78,7 +79,6 @@ i.fa.fa-times{
       padding: 0 1.5em;
 
       padding-bottom: 10px;
-      border-bottom: 1px solid #d7dadb;
     }
     &-descripcion{
       align-self: flex-start;
@@ -86,6 +86,7 @@ i.fa.fa-times{
       margin-top: 1em;
     }
     &-details{
+      @include flexbox($align: flex-end);
       border: 0px;
       margin: 10px 0;
     }
@@ -110,15 +111,15 @@ i.fa.fa-times{
 }
 
 .favform{
-  align-self:  flex-end;
-  margin-right: 1em;
+  height: 100%;
+  @include flexbox($align: flex-end);
 }
 .btn-fav{
   border-radius: 100%;
   border: 3px solid black;
   box-sizing: border-box;
   padding: 0.5em;
-
+  margin-bottom: -5px;
   .fa.fa-heart{
     font-size: 2em;
   }
@@ -138,4 +139,14 @@ i.fa.fa-times{
     transform: scale(1.5);
     color: darken($greenSea, 10%);
   }
+}
+
+.deleteoffer{
+  border: 0;
+  padding: 0;
+  color: red;
+  padding: 0;
+  font-size: 1em;
+  margin: 0;
+  cursor: pointer;
 }
