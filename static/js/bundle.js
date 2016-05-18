@@ -26527,6 +26527,13 @@ function gestion_ajax() {
     return [year, month, day].join('-');
   };
 
+  var unformatDate = function unformatDate(date) {
+    var sDate = date.split("/");
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var month = months[parseInt(sDate[0], 10) - 1];
+    return month + " " + sDate[1] + ", " + sDate[2];
+  };
+
   //Funcion auxiliar para crear oferats nuevas
   var crear_oferta = function crear_oferta() {
     var first = $($fechaInicio).val();
@@ -26582,11 +26589,12 @@ function gestion_ajax() {
     $(obj).parent().parent().fadeOut();
   };
   var ofertaGuardada = function ofertaGuardada() {
-    var insert = '<div class="offer-item row"><p class="four columns"> ' + $($fechaInicio).val() + ' </p> <p class="four columns">' + $($fechaFin).val() + ' </p><p class="four columns"> ' + $($precio).val() + '</p></div>';
+    var insert = '<div class="offer-item row"><p class="four columns"> ' + unformatDate($($fechaInicio).val()) + ' </p><p class="four columns"> ' + $($precio).val() + '</p> <p class="four columns">' + unformatDate($($fechaFin).val()) + ' </p></div>';
 
     //Limpiado campos
     limpiar_campos_oferta();
 
+    if ($('#nooffers')) $('#nooffers').fadeOut();
     $(insert).appendTo('#offer-list').hide().fadeIn(2000);
   };
 

@@ -64,6 +64,13 @@ export default function gestion_ajax() {
     return [year, month, day].join('-');
   }
 
+  let unformatDate = (date) => {
+    let sDate = date.split("/");
+    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let month = months[parseInt(sDate[0], 10)-1];
+    return month + " " + sDate[1] + ", " + sDate[2];
+  }
+
   //Funcion auxiliar para crear oferats nuevas
   let crear_oferta = () => {
     let first = $($fechaInicio).val();
@@ -120,12 +127,18 @@ export default function gestion_ajax() {
     $(obj).parent().parent().fadeOut();
   };
   let ofertaGuardada = () => {
-    let insert = `<div class="offer-item row"><p class="four columns"> ${$($fechaInicio).val()} </p> <p class="four columns">${$($fechaFin).val()} </p><p class="four columns"> ${$($precio).val()}</p></div>`;
+    let insert = `<div class="offer-item row"><p class="four columns"> ${unformatDate($($fechaInicio).val())} </p><p class="four columns"> ${$($precio).val()}</p> <p class="four columns">${unformatDate($($fechaFin).val())} </p></div>`;
 
     //Limpiado campos
     limpiar_campos_oferta();
 
+    if($('#nooffers'))
+      $('#nooffers').fadeOut();
     $(insert).appendTo('#offer-list').hide().fadeIn(2000);
+
+
+
+
   };
 
   let limpiar_campos_oferta = () => {
@@ -183,4 +196,5 @@ export default function gestion_ajax() {
       }
       $('#use-price').remove();
   });
+
 }
